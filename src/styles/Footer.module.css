@@ -1,0 +1,31 @@
+/* src/styles/Footer.module.css */
+.footer {
+    background-color: #111111; /* Dark background */
+    color: white; /* White text */
+    text-align: center;
+    padding: 20px 0; /* Vertical padding */
+    position: fixed; /* Fixed position to stay at the bottom */
+    bottom: 0; /* Aligns at the bottom of the viewport */
+    left: 0; /* Aligns to the left edge */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensures it stays above other content */
+}
+
+.footerContent {
+    margin: 0 auto; /* Centers the content */
+    max-width: 1200px; /* Limits the width for larger screens */
+}
+
+.footerLinks {
+    margin-top: 10px; /* Space above links */
+}
+
+.footerLinks a {
+    color: #61dafb; /* Link color */
+    text-decoration: none; /* No underline */
+    margin: 0 15px; /* Space between links */
+}
+
+.footerLinks a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
