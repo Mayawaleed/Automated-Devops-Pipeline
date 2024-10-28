@@ -1,14 +1,11 @@
-// src/pages/index.js
-import Navbar from '../components/Navbar';
-
-const Home = () => {
+// src/components/Navbar.js
+const Navbar = () => {
     return (
-        <div>
-            <Navbar />
+        <nav>
             <h1>Welcome to the DevOps Upload App</h1>
             <p>This app provides personalized tool and script recommendations.</p>
-        </div>
+        </nav>
     );
 };
 
-export default Home;
+export default Navbar;
