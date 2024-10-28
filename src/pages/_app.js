@@ -1,5 +1,14 @@
-import "@/styles/globals.css";
+// src/pages/_app.js
+import '../styles/upload.css'; // Ensure this path is correct
+import Navbar from '../components/Navbar';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+    return (
+        <>
+            <Navbar />
+            <Component {...pageProps} />
+        </>
+    );
 }
+
+export default MyApp;

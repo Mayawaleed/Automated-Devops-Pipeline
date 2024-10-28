@@ -1,6 +1,5 @@
 // src/pages/upload.js
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
 
 const stages = [
     'Planning',
@@ -33,28 +32,19 @@ const Upload = () => {
             umlLink,
             selectedOption
         });
-        // You can send this data to your backend for processing
         // Navigate to another stage or display a success message
     };
 
     return (
-        <div>
-            <Navbar />
+        <div className="upload-container">
             <h1>Upload Project Details</h1>
 
             <h2>Select Pipeline Stage</h2>
-            <div style={{ marginBottom: '20px' }}>
+            <div className="stage-buttons">
                 {stages.map((stage) => (
                     <button
                         key={stage}
-                        style={{
-                            margin: '5px',
-                            padding: '10px',
-                            backgroundColor: selectedStage === stage ? '#0070f3' : '#eaeaea',
-                            color: selectedStage === stage ? 'white' : 'black',
-                            border: 'none',
-                            cursor: 'pointer'
-                        }}
+                        className={`stage-button ${selectedStage === stage ? 'active' : ''}`}
                         onClick={() => handleStageSelection(stage)}
                     >
                         {stage}
@@ -63,7 +53,7 @@ const Upload = () => {
             </div>
 
             {selectedStage && (
-                <form onSubmit={handleSubmit}>
+                <form className="upload-form" onSubmit={handleSubmit}>
                     <h3>Selected Stage: {selectedStage} is Activated</h3>
                     <div>
                         <label>
@@ -91,34 +81,22 @@ const Upload = () => {
                     </div>
                     <div>
                         <h4>Choose between:</h4>
-                        <button
-                            type="button"
-                            style={{
-                                margin: '5px',
-                                padding: '10px',
-                                backgroundColor: selectedOption === 'scripts' ? '#0070f3' : '#eaeaea',
-                                color: selectedOption === 'scripts' ? 'white' : 'black',
-                                border: 'none',
-                                cursor: 'pointer'
-                            }}
-                            onClick={() => handleOptionSelection('scripts')}
-                        >
-                            Scripts
-                        </button>
-                        <button
-                            type="button"
-                            style={{
-                                margin: '5px',
-                                padding: '10px',
-                                backgroundColor: selectedOption === 'tools' ? '#0070f3' : '#eaeaea',
-                                color: selectedOption === 'tools' ? 'white' : 'black',
-                                border: 'none',
-                                cursor: 'pointer'
-                            }}
-                            onClick={() => handleOptionSelection('tools')}
-                        >
-                            External Tools
-                        </button>
+                        <div className="option-buttons">
+                            <button
+                                type="button"
+                                className={`option-button ${selectedOption === 'scripts' ? 'active' : ''}`}
+                                onClick={() => handleOptionSelection('scripts')}
+                            >
+                                Scripts
+                            </button>
+                            <button
+                                type="button"
+                                className={`option-button ${selectedOption === 'tools' ? 'active' : ''}`}
+                                onClick={() => handleOptionSelection('tools')}
+                            >
+                                External Tools
+                            </button>
+                        </div>
                     </div>
                     <div>
                         <button type="submit" disabled={!selectedOption}>
