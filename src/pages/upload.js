@@ -1,3 +1,6 @@
+
+
+
 // // src/pages/upload.js
 // import { useState } from 'react';
 
@@ -32,12 +35,12 @@
 //             umlLink,
 //             selectedOption
 //         });
-//         // Navigate to another stage or display a success message
+//         // Logic for next steps after submission
 //     };
 
 //     return (
 //         <div className="upload-container">
-//             <h1>Upload Project Details</h1>
+//             <h1>Upload Pipeline Details</h1>
 
 //             <h2>Select Pipeline Stage</h2>
 //             <div className="stage-buttons">
@@ -111,7 +114,6 @@
 
 // export default Upload;
 
-
 // src/pages/upload.js
 import { useState } from 'react';
 
@@ -120,7 +122,8 @@ const stages = [
     'Development',
     'Testing',
     'Deployment',
-    'Monitoring'
+    'Monitoring',
+    'All Stages' // Added "All Stages" option
 ];
 
 const Upload = () => {
@@ -224,4 +227,3 @@ const Upload = () => {
 };
 
 export default Upload;
-
