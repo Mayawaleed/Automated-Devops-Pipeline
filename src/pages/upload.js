@@ -1,7 +1,4 @@
 
-
-
-// // src/pages/upload.js
 // import { useState } from 'react';
 
 // const stages = [
@@ -9,7 +6,8 @@
 //     'Development',
 //     'Testing',
 //     'Deployment',
-//     'Monitoring'
+//     'Monitoring',
+//     'All Stages' // Added "All Stages" option
 // ];
 
 // const Upload = () => {
@@ -114,7 +112,6 @@
 
 // export default Upload;
 
-// src/pages/upload.js
 import { useState } from 'react';
 
 const stages = [
@@ -128,8 +125,6 @@ const stages = [
 
 const Upload = () => {
     const [selectedStage, setSelectedStage] = useState('');
-    const [documentLink, setDocumentLink] = useState('');
-    const [umlLink, setUmlLink] = useState('');
     const [selectedOption, setSelectedOption] = useState('');
 
     const handleStageSelection = (stage) => {
@@ -145,8 +140,6 @@ const Upload = () => {
         e.preventDefault();
         console.log({
             selectedStage,
-            documentLink,
-            umlLink,
             selectedOption
         });
         // Logic for next steps after submission
@@ -172,30 +165,6 @@ const Upload = () => {
             {selectedStage && (
                 <form className="upload-form" onSubmit={handleSubmit}>
                     <h3>Selected Stage: {selectedStage} is Activated</h3>
-                    <div>
-                        <label>
-                            Document Link:
-                            <input
-                                type="url"
-                                value={documentLink}
-                                onChange={(e) => setDocumentLink(e.target.value)}
-                                required
-                                placeholder="Enter document URL"
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            UML Diagram Link:
-                            <input
-                                type="url"
-                                value={umlLink}
-                                onChange={(e) => setUmlLink(e.target.value)}
-                                required
-                                placeholder="Enter UML diagram URL"
-                            />
-                        </label>
-                    </div>
                     <div>
                         <h4>Choose between:</h4>
                         <div className="option-buttons">
