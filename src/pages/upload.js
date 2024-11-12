@@ -232,9 +232,9 @@ const Upload = () => {
 
     return (
         <div className="upload-container">
-            <h1>Upload Pipeline Details</h1>
+            <h1>Select Pipeline Stage</h1>
 
-            <h2>Select Pipeline Stage</h2>
+         
             <div className="stage-buttons">
                 {stages.map((stage) => (
                     <button
