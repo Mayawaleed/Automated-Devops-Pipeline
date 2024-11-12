@@ -1,5 +1,5 @@
 // src/pages/dashboard.js
-import Navbar from '../components/Navbar';
+import Navbar from '../components/NavBar';
 
 const Dashboard = () => {
     return (

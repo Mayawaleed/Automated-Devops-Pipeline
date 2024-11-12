@@ -1,62 +1,44 @@
 /* NavBar.module.css */
 
 .navbar {
+    background-color: #333;
+    padding: 10px 20px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
-    background-color: #1a1a1a;
-    color: #fff;
+    align-items: center;
   }
   
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-  }
-  
-  .navLinks {
-    display: flex;
-    gap: 2rem;
+  .navbarLinks {
     list-style: none;
+    display: flex;
+    gap: 20px;
   }
   
-  .navLinks li a {
+  .navbarLinks li {
+    display: inline;
+  }
+  
+  .navbarLinks a {
+    color: white;
     text-decoration: none;
-    color: #ddd;
-    font-size: 1rem;
-    transition: color 0.3s;
+    font-size: 16px;
   }
   
-  .navLinks li a:hover {
-    color: #fff;
+  .navbarLinks a:hover {
+    text-decoration: underline;
   }
   
-  .getStarted {
-    background-color: #ff4d4d;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-align: center;
-  }
-  
-  .getStarted a {
-    color: #fff;
-    text-decoration: none;
-<<<<<<< Updated upstream
-}
-
-.nav ul li a.active {
-    background-color: #1e90ff;
-    color: #ffffff;
-}
-
-=======
-    font-weight: bold;
+  .navbarButton {
+    background-color: #0070f3;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s;
   }
   
-  .getStarted a:hover {
-    background-color: #e63939;
+  .navbarButton:hover {
+    background-color: #005bb5;
   }
   
->>>>>>> Stashed changes
