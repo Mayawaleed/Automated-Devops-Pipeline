@@ -1,0 +1,36 @@
+/* src/styles/LearnMore.module.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.8rem;
+    color: #0070f3;
+    margin-top: 1.5rem;
+  }
+  
+  .sectionDescription {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+  }
+  
