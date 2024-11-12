@@ -50,8 +50,7 @@
 }
 
 .imageContainer img {
-  max-width: 100%;  /* Ensures the image is responsive */
+  max-width: 1000%;  /* Ensures the image is responsive */
   height: auto;     /* Maintains the aspect ratio */
-  border-radius: 8px; /* Optional: adds rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow around the image */
+  
 }
