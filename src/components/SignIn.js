@@ -1,6 +1,6 @@
 // src/components/SignIn.js
 import { useState } from 'react';
-import styles from '../styles/signIn.module.css'; // Ensure the correct import path
+import styles from '../styles/signIn.module.css'; // Ensure the correct path
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -21,27 +21,34 @@ const SignIn = () => {
 
     return (
         <div className={styles.signInContainer}>
-            <h1>Sign In</h1>
+            <h1 className={styles.heading}>Sign In</h1> {/* Apply the scoped class here */}
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username" className={styles.label}>Username:</label>
                 <input
                     type="text"
                     id="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    className={styles.input}
                 />
 
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password" className={styles.label}>Password:</label>
                 <input
                     type="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className={styles.input}
                 />
 
-                <button type="submit" className={styles.signInButton}>Sign In</button>
+                <button type="submit" className={styles.button}>Sign In</button>
                 {message && <p className={message.includes('Successfully') ? styles.success : styles.error}>{message}</p>}
             </form>
+
+            <div className={styles.createAccountLink}>
+                <p>Don't have an account?</p>
+                <a href="/signup" className={styles.link}>Create Account</a>
+            </div>
         </div>
     );
 };
