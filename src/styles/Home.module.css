@@ -2,40 +2,50 @@
 
 .container {
   display: flex;
-  flex-direction: row; /* Align items horizontally */
-  align-items: center; /* Vertically center the items */
-  justify-content: space-between; /* Ensure space between the text and image */
-  min-height: 80vh; /* Set the minimum height */
-  width: 100%; /* Ensure the container takes the full width of the page */
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 80vh;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .textContainer {
-  flex: 1; /* Take up the remaining space on the left */
-  padding-left: 2rem; /* Add padding between the text and the left edge */
-  text-align: left; /* Ensure text is aligned to the left */
+  flex: 1;
+  padding: 2rem;
+  text-align: left;
 }
 
+
 .title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #1a1a1a;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 1.5rem;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: center;
-  width: 100%;
+  justify-content: start;
+  margin-top: 2rem;
 }
 
 .learnMoreButton {
   background-color: #0070f3;
   color: white;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 2rem;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .learnMoreButton:hover {
@@ -43,14 +53,31 @@
 }
 
 .imageContainer {
-  flex-shrink: 0; /* Prevent the image from shrinking */
-  width: 50%; /* Limit the width of the image container */
+  flex-shrink: 0;
+  width: 40%;
   display: flex;
-  justify-content: flex-end; /* Align the image to the right */
+  justify-content: flex-end;
 }
 
 .imageContainer img {
-  max-width: 1000%;  /* Ensures the image is responsive */
-  height: auto;     /* Maintains the aspect ratio */
-  
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .textContainer {
+    padding: 1rem;
+  }
+
+  .imageContainer {
+    width: 100%;
+    margin-top: 2rem;
+  }
 }
