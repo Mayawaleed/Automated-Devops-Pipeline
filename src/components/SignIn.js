@@ -1,6 +1,6 @@
 // src/components/SignIn.js
 import { useState } from 'react';
-import { useRouter } from 'next/router'; // Import useRouter
+import { useRouter } from 'next/router';
 import styles from '../styles/signIn.module.css';
 
 const SignIn = () => {
@@ -17,7 +17,7 @@ const SignIn = () => {
             return;
         }
 
-        // You can replace this part with actual authentication logic
+        // Handle the sign-in logic here (e.g., validate credentials)
         console.log(`Signing in with username: ${username}`);
 
         setMessage('Successfully signed in!');
@@ -54,7 +54,7 @@ const SignIn = () => {
 
             <div className={styles.createAccountLink}>
                 <p>Don't have an account?</p>
-                <a href="/signup" className={styles.link}>Create Account</a>
+                <a href="/signup" className={styles.link}>Create Account</a> {/* Link to Sign Up page */}
             </div>
         </div>
     );
