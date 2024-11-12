@@ -1,11 +1,13 @@
 // src/components/SignIn.js
 import { useState } from 'react';
-import styles from '../styles/signIn.module.css'; // Ensure the correct path
+import { useRouter } from 'next/router'; // Import useRouter
+import styles from '../styles/signIn.module.css';
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const router = useRouter(); // Initialize useRouter
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,13 +17,18 @@ const SignIn = () => {
             return;
         }
 
+        // You can replace this part with actual authentication logic
         console.log(`Signing in with username: ${username}`);
+
         setMessage('Successfully signed in!');
+
+        // Redirect to the home page after successful login
+        router.push('/'); // This will navigate to the home page
     };
 
     return (
         <div className={styles.signInContainer}>
-            <h1 className={styles.heading}>Sign In</h1> {/* Apply the scoped class here */}
+            <h1 className={styles.heading}>Sign In</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username" className={styles.label}>Username:</label>
                 <input
