@@ -1,68 +1,89 @@
-/* NavBar.module.css */
-
+/* General styling for the navbar */
 .navbar {
-    background-color: #333;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbarLinks {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-  }
-  
-  .navbarLinks li {
-    display: inline;
-  }
-  
-  .navbarLinks a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s, transform 0.3s;
-  }
-  
-  .navbarLinks a:hover {
-    color: #00bcd4; /* Change color to cyan when hovering */
-    text-decoration: underline;
-    transform: scale(1.1); /* Slightly scale up the link */
-  }
-  
-  .navbarButton {
-    background-color: #0070f3;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .navbarButton:hover {
-    background-color: #005bb5;
-    transform: scale(1.05);
-  }
-  
-  .navbarButton:active {
-    background-color: #004088;
-  }
-  
-  .navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
+  background-color: #333; /* Dark background for a sleek, professional look */
+  padding: 15px 30px; /* Ample padding for a spacious design */
+  display: flex;
+  justify-content: space-between; /* Spacing between links and button */
+  align-items: center; /* Align items in the center vertically */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
+  border-bottom: 2px solid #444; /* Subtle border at the bottom */
+}
+
+/* Styling for logo (if needed) */
+.navbar .logo {
+  font-size: 24px;
+  font-weight: 600; /* Slightly bolder font for authority */
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.2px; /* Increased letter-spacing for a clean design */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Styling for the links */
+.navbarLinks {
+  list-style: none;
+  display: flex;
+  gap: 35px; /* Space between the links */
+  margin: 0;
+}
+
+/* Styling for each link */
+.navbarLinks li {
+  display: inline;
+}
+
+/* Styling for the anchor tag inside each link */
+.navbarLinks a {
+  color: white;
+  text-decoration: none; /* Remove underline */
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.5px; /* Space between letters */
+  transition: color 0.3s, transform 0.3s ease, padding 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect for links */
+.navbarLinks a:hover {
+  color: #00bcd4; /* Cyan color for a professional accent */
+  text-decoration: underline; /* Underline on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+  padding-bottom: 5px; /* Adds spacing under text */
+}
+
+/* Styling for the 'Get Started' button */
+.navbarButton {
+  background-color: #0070f3; /* Blue background */
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 50px; /* Rounded corners for modern look */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.3s, transform 0.3s ease; /* Smooth transition for background and scale */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+/* Hover effect for the button */
+.navbarButton:hover {
+  background-color: #005bb5; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Zoom effect on hover */
+}
+
+/* Active state for the button (when clicked) */
+.navbarButton:active {
+  background-color: #004088; /* Even darker blue */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow when clicked */
+}
+
+/* Apply smooth transition for logo, links, and button */
+.navbar .logo,
+.navbarLinks a,
+.navbarButton {
+  transition: all 0.3s ease-in-out; /* Smooth transition for all elements */
+}
