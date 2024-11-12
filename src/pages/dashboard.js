@@ -1,5 +1,6 @@
 // src/pages/dashboard.js
-import Navbar from '../components/NavBar';
+import Navbar from '../src/components/NavBar';  // Adjust if needed
+
 
 const Dashboard = () => {
     return (

@@ -12,7 +12,10 @@ const NavBar = () => {
           <li><Link href="/dashboard">Dashboard</Link></li>
           <li><Link href="/about">About Us</Link></li>
         </ul>
+        <Link href="/signin">
         <button className={styles.navbarButton}>Get Started</button>
+      </Link>
+       
       </nav>
     );
   };
