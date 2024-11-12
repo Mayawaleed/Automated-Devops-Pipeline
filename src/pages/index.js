@@ -17,9 +17,9 @@ export default function Home() {
       </div>
 
       <div className={styles.imageContainer}>
-        <Image 
-          src="/images/devops.jpeg"  // Correct path from the 'public' folder
-          alt="" 
+        <Image
+          src="/images/devops.jpeg"  // Correct path to the 'public' folder
+          alt="DevOps Image"
           width={600}  // Width of the image
           height={400} // Height of the image
         />
