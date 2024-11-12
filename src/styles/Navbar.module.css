@@ -2,16 +2,21 @@
 
 .navbar {
     background-color: #333;
-    padding: 10px 20px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .navbarLinks {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    margin: 0;
   }
   
   .navbarLinks li {
@@ -22,23 +27,42 @@
     color: white;
     text-decoration: none;
     font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
   }
   
   .navbarLinks a:hover {
+    color: #00bcd4; /* Change color to cyan when hovering */
     text-decoration: underline;
+    transform: scale(1.1); /* Slightly scale up the link */
   }
   
   .navbarButton {
     background-color: #0070f3;
     color: white;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
   }
   
   .navbarButton:hover {
     background-color: #005bb5;
+    transform: scale(1.05);
+  }
+  
+  .navbarButton:active {
+    background-color: #004088;
+  }
+  
+  .navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
   
