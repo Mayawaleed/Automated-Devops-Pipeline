@@ -1,5 +1,5 @@
 // src/pages/signup.js
-import SignUp from '../components/SignUp';  // Correct path
+import SignUp from '../components/SignUp';
 
 
 const SignUpPage = () => {

@@ -1,52 +1,86 @@
-// src/components/SignUp.js
 import { useState } from 'react';
-import styles from '../styles/signUp.module.css';  // Make sure the path is correct
+import styles from '../styles/SignUp.module.css';
 
 const SignUp = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!email || !password) {
-            setMessage('Please enter both email and password.');
+        if (!firstName || !lastName || !email || !password || !confirmPassword) {
+            setMessage('Please fill out all fields.');
             return;
         }
 
-        // Handle the sign-up logic here (e.g., send data to a server)
-        console.log(`Signing up with email: ${email}`);
+        if (password !== confirmPassword) {
+            setMessage('Passwords do not match.');
+            return;
+        }
 
-        setMessage('Account created successfully!');
+        setMessage('Sign Up Successful!');
     };
 
     return (
         <div className={styles.signUpContainer}>
-            <h1>Create Account</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email:</label>
+            <h1 className={styles.title}>Create Your Account</h1>
+            <form onSubmit={handleSubmit} className={styles.formContainer}>
+                <label htmlFor="firstName" className={styles.label}>First Name:</label>
+                <input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className={styles.inputField}
+                    required
+                />
+                
+                <label htmlFor="lastName" className={styles.label}>Last Name:</label>
+                <input
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className={styles.inputField}
+                    required
+                />
+                
+                <label htmlFor="email" className={styles.label}>Email:</label>
                 <input
                     type="email"
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className={styles.inputField}
                     required
-                    className={styles.input}
                 />
-
-                <label htmlFor="password">Password:</label>
+                
+                <label htmlFor="password" className={styles.label}>Password:</label>
                 <input
                     type="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className={styles.inputField}
                     required
-                    className={styles.input}
+                />
+                
+                <label htmlFor="confirmPassword" className={styles.label}>Confirm Password:</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className={styles.inputField}
+                    required
                 />
 
-                <button type="submit" className={styles.button}>Create Account</button>
-                {message && <p className={message.includes('successfully') ? styles.success : styles.error}>{message}</p>}
+                <button type="submit" className={styles.signUpButton}>Sign Up</button>
+                {message && <p className={message.includes('Successful') ? styles.success : styles.error}>{message}</p>}
             </form>
         </div>
     );
