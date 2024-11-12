@@ -7,6 +7,7 @@ const Navbar = () => {
     const router = useRouter();
 
     return (
+<<<<<<< Updated upstream
         <nav className={styles.nav}>
             <ul>
                 <li>
@@ -28,8 +29,29 @@ const Navbar = () => {
                     <Link href="/createProject" className={router.pathname === '/createProject' ? styles.active : ''}>Create Project</Link>
                 </li>
             </ul>
+=======
+        <nav className={styles.navbar}>
+
+          <ul className={styles.navLinks}>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/create-project">Create Project</Link>
+            </li>
+            <li>
+              <Link href="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link href="/about">About Us</Link>
+            </li>
+          </ul>
+          <div className={styles.getStarted}>
+            <Link href="/get-started">Get Started</Link>
+          </div>
+>>>>>>> Stashed changes
         </nav>
-    );
-};
+      );
+    };
 
 export default Navbar;

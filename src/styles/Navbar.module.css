@@ -1,49 +1,48 @@
-/* src/styles/Navbar.module.css */
-.nav {
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    width: 100vw; /* Full viewport width */
-    padding: 15px 0; /* Vertical padding */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: fixed; /* Fixed position at the top */
-    top: 0;
-    left: 0;
-    z-index: 100;
-}
+/* NavBar.module.css */
 
-.nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.navbar {
     display: flex;
     align-items: center;
-    gap: 20px;
-    justify-content: flex-start; /* Align items to the left */
-    padding-left: 20px; /* Add left padding for spacing */
-}
-
-.nav ul li {
-    transition: transform 0.3s ease;
-}
-
-.nav ul li:hover {
-    transform: scale(1.1);
-}
-
-.nav ul li a {
-    color: #f0f0f0;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #1a1a1a;
+    color: #fff;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .navLinks {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  
+  .navLinks li a {
     text-decoration: none;
-    padding: 10px 15px;
+    color: #ddd;
     font-size: 1rem;
-    font-weight: 500;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.nav ul li a:hover {
-    background-color: #333;
-    color: #1e90ff;
+    transition: color 0.3s;
+  }
+  
+  .navLinks li a:hover {
+    color: #fff;
+  }
+  
+  .getStarted {
+    background-color: #ff4d4d;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .getStarted a {
+    color: #fff;
     text-decoration: none;
+<<<<<<< Updated upstream
 }
 
 .nav ul li a.active {
@@ -51,3 +50,13 @@
     color: #ffffff;
 }
 
+=======
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .getStarted a:hover {
+    background-color: #e63939;
+  }
+  
+>>>>>>> Stashed changes

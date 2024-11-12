@@ -1,31 +1,34 @@
-/* src/styles/Footer.module.css */
+/* Footer.module.css */
+
 .footer {
-    background-color: #111111; /* Dark background */
-    color: white; /* White text */
+    background-color: #1a1a1a;
+    color: #fff;
     text-align: center;
-    padding: 20px 0; /* Vertical padding */
-    position: fixed; /* Fixed position to stay at the bottom */
-    bottom: 0; /* Aligns at the bottom of the viewport */
-    left: 0; /* Aligns to the left edge */
-    width: 100%; /* Full width */
-    z-index: 1000; /* Ensures it stays above other content */
-}
-
-.footerContent {
-    margin: 0 auto; /* Centers the content */
-    max-width: 1200px; /* Limits the width for larger screens */
-}
-
-.footerLinks {
-    margin-top: 10px; /* Space above links */
-}
-
-.footerLinks a {
-    color: #61dafb; /* Link color */
-    text-decoration: none; /* No underline */
-    margin: 0 15px; /* Space between links */
-}
-
-.footerLinks a:hover {
-    text-decoration: underline; /* Underline on hover */
-}
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footerLinks {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .footerLinks a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .footerLinks a:hover {
+    color: #fff;
+  }
+  
