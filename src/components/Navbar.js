@@ -24,6 +24,9 @@ const Navbar = () => {
                 <li>
                     <Link href="/login" className={router.pathname === '/login' ? styles.active : ''}>Sign In</Link>
                 </li>
+                <li>
+                    <Link href="/createProject" className={router.pathname === '/createProject' ? styles.active : ''}>Create Project</Link>
+                </li>
             </ul>
         </nav>
     );
