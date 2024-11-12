@@ -8,7 +8,7 @@ const NavBar = () => {
        
         <ul className={styles.navbarLinks}>
           <li><Link href="/">Home</Link></li>
-          <li><Link href="/create-project">Create Project</Link></li>
+          <li><Link href="/createProject">Create Project</Link></li>
           <li><Link href="/dashboard">Dashboard</Link></li>
           <li><Link href="/about">About Us</Link></li>
         </ul>
