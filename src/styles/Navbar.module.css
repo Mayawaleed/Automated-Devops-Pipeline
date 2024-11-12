@@ -48,8 +48,7 @@
 
 /* Hover effect for links */
 .navbarLinks a:hover {
-  color: #00bcd4; /* Cyan color for a professional accent */
-  text-decoration: underline; /* Underline on hover */
+  color: #0070f3; /* Cyan color for a professional accent */
   transform: scale(1.05); /* Slight zoom effect */
   padding-bottom: 5px; /* Adds spacing under text */
 }
