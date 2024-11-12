@@ -164,7 +164,7 @@ const Upload = () => {
 
             {selectedStage && (
                 <form className="upload-form" onSubmit={handleSubmit}>
-                    <h3>Selected Stage: {selectedStage} is Activated</h3>
+                    {/* <h3>Selected Stage: {selectedStage} is Activated</h3> */}
                     <div>
                         <h4>Choose between:</h4>
                         <div className="option-buttons">
