@@ -2,16 +2,7 @@
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
-import InfoComponent from "../components/InfoComponent";
 
-export default function Home() {
-  return (
-      <div>
-          <h1>Welcome to the DevOps App</h1>
-          <InfoComponent />
-      </div>
-  );
-}
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -41,5 +32,3 @@ export default function Home() {
     </div>
   );
 }
-
-
