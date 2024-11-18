@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
-        <div className={styles.facultyLinks}>
+        <div className={styles.StageLinks}>
           <h3>Stages Links</h3>
           <ul>
             <li><Link href="/Planning">Planning</Link></li>
