@@ -10,7 +10,7 @@ const Footer = () => {
           <ul>
             <li><Link href="/Planning">Planning</Link></li>
             <li><Link href="/Building">Building</Link></li>
-            <li><Link href="/Testaing">Testaing</Link></li>
+            <li><Link href="/Testing">Testing</Link></li>
             <li><Link href="/Deployment">Deployment</Link></li>
             <li><Link href="/Monitoring">Monitoring</Link></li>
           </ul>
