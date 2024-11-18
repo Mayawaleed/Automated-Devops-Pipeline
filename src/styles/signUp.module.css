@@ -58,3 +58,16 @@
     color: red;
     margin-top: 10px;
 }
+.link {
+    display: block; /* Makes it behave like a block element for better positioning */
+    text-align: center;
+    margin: 20px 0; /* Adds space around the link */
+    color: #007bff;
+    text-decoration: none; /* Removes underline by default */
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.link:hover {
+    text-decoration: underline; /* Adds underline on hover */
+}
