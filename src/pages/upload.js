@@ -208,7 +208,7 @@ const stages = [
     'Testing',
     'Deployment',
     'Monitoring',
-    'All Stages' // Added "All Stages" option
+   
 ];
 
 const Upload = () => {
