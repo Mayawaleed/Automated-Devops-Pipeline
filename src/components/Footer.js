@@ -6,16 +6,13 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <div className={styles.facultyLinks}>
-          <h3>Faculties Links</h3>
+          <h3>Stages Links</h3>
           <ul>
-            <li><Link href="/alsun">Alsun</Link></li>
-            <li><Link href="/mass-communication">Mass Communication</Link></li>
-            <li><Link href="/oral-dental-medicine">Oral & Dental Medicine</Link></li>
-            <li><Link href="/engineering-architecture">Engineering - Architecture</Link></li>
-            <li><Link href="/computer-science">Computer Science</Link></li>
-            <li><Link href="/business-administration">Business Administration</Link></li>
-            <li><Link href="/pharmacy">Pharmacy</Link></li>
-            <li><Link href="/engineering-electronics">Engineering - Electronics</Link></li>
+            <li><Link href="/Planning">Planning</Link></li>
+            <li><Link href="/Building">Building</Link></li>
+            <li><Link href="/Testaing">Testaing</Link></li>
+            <li><Link href="/Deployment">Deployment</Link></li>
+            <li><Link href="/Monitoring">Monitoring</Link></li>
           </ul>
         </div>
       </div>
