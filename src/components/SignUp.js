@@ -180,7 +180,9 @@ const SignUp = () => {
                     className={styles.inputField}
                     required
                 />
-                 <a href="/signup" className={styles.link}>already have an account</a> {/* Link to Sign Up page */}
+                <a href="/signIn" className={styles.link}>Already have an account?</a> {/* Link to Sign In page */}
+
+                
                 <button type="submit" className={styles.signUpButton}>Sign Up</button>
                 {message && <p className={message.includes('Successful') ? styles.success : styles.error}>{message}</p>}
             </form>
