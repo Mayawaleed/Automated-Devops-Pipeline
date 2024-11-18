@@ -180,7 +180,7 @@ const SignUp = () => {
                     className={styles.inputField}
                     required
                 />
-                <a href="/signIn" className={styles.link}>Already have an account?</a> {/* Link to Sign In page */}
+                <a href="/signin" className={styles.link}>Already have an account?</a> {/* Link to Sign In page */}
 
                 
                 <button type="submit" className={styles.signUpButton}>Sign Up</button>
