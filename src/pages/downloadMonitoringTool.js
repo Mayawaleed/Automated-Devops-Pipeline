@@ -10,7 +10,7 @@ const DownloadMonitoringTool = () => {
             </p>
             <div className={styles.buttonContainer}>
                 <a
-                    // href="/path/to/monitoring-tool.zip" // Replace with actual file path
+                      href="/path/to/monitoring-tool.zip"//Replace with actual file path
                     download
                     className={styles.downloadButton}
                 >
