@@ -167,4 +167,140 @@
     margin-top: 1.2rem;
     letter-spacing: 0.3px;
 } */
+.createProjectContainer {
+    max-width: 650px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    border-radius: 16px;
+    background: url('https://cdn.pixabay.com/photo/2017/08/06/00/36/devops-2593854_1280.jpg') no-repeat center center/cover;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+}
 
+/* Blur Overlay for Readability */
+.createProjectContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better contrast */
+    border-radius: 16px;
+    z-index: 1;
+}
+
+.createProjectContainer h1 {
+    color: #ffffff;
+    font-size: 2.4rem;
+    margin-bottom: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+.createProjectContainer form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+}
+
+.createProjectContainer label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-top: 1rem;
+}
+
+.createProjectContainer input,
+.createProjectContainer select {
+    width: 100%;
+    padding: 0.95rem;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    backdrop-filter: blur(8px);
+}
+
+.createProjectContainer input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.createProjectContainer select {
+    appearance: none;
+    cursor: pointer;
+}
+
+/* Button Styling */
+.createButton {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+}
+
+.createButton:hover {
+    background: linear-gradient(135deg, #ff6b50, #ffa767);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 126, 95, 0.3);
+}
+
+.createButton:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Success and Error Messages */
+.success,
+.error {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.success {
+    color: #2ecc71;
+}
+
+.error {
+    color: #e74c3c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .createProjectContainer {
+        padding: 2rem;
+        max-width: 90%;
+    }
+
+    .createProjectContainer h1 {
+        font-size: 2rem;
+    }
+
+    .createProjectContainer input,
+    .createProjectContainer select {
+        padding: 0.85rem;
+    }
+
+    .createButton {
+        font-size: 1rem;
+    }
+}
