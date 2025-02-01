@@ -279,19 +279,6 @@ const Upload = () => {
         setSelectedOption(option);
     };
 
-    // Handle form submission (submit when user clicks "Go to Next Stage")
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (selectedOption === 'scripts') {
-            // Fetch script when the "Scripts" option is selected
-            fetchScript(selectedStage.toLowerCase());
-        }
-
-        // Always allow proceeding to the next stage regardless of whether a script was selected
-        console.log('Proceeding to next stage:', selectedStage);
-    };
-
     // Fetch the script based on the stage
     const fetchScript = async (stage) => {
         setLoading(true);
@@ -299,9 +286,8 @@ const Upload = () => {
         setScriptFetched(false); // Reset the fetch status before trying
 
         try {
-            console.log(`Fetching script for stage: ${stage}`); // Debugging line
+            console.log(`Fetching script for stage: ${stage}`);
 
-            // Ensure the stage is being passed as a lowercase string (or format it as needed)
             const response = await fetch(`http://127.0.0.1:8000/api/get_scripts/${stage.toLowerCase()}/`);
             const data = await response.json();
 
@@ -312,7 +298,7 @@ const Upload = () => {
                 setError('No scripts found for this stage.');
             }
         } catch (error) {
-            console.error('Error fetching script:', error); // Log the error for debugging
+            console.error('Error fetching script:', error);
             setError('Failed to fetch the script.');
         } finally {
             setLoading(false);
@@ -335,37 +321,28 @@ const Upload = () => {
             </div>
 
             {selectedStage && (
-                <form className="upload-form" onSubmit={handleSubmit}>
-                    <div>
-                        <h4>Choose between:</h4>
-                        <div className="option-buttons">
-                            <button
-                                type="button"
-                                className={`option-button ${selectedOption === 'scripts' ? 'active' : ''}`}
-                                onClick={() => handleOptionSelection('scripts')}
-                            >
-                                Scripts
-                            </button>
-                            <button
-                                type="button"
-                                className={`option-button ${selectedOption === 'tools' ? 'active' : ''}`}
-                                onClick={() => handleOptionSelection('tools')}
-                            >
-                                External Tools
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* "Go to Next Stage" button */}
-                    <div>
+                <div>
+                    <h4>Choose between:</h4>
+                    <div className="option-buttons">
                         <button
-                            type="submit"
-                            disabled={!selectedStage || !selectedOption}  // Ensure both stage and option are selected
+                            type="button"
+                            className={`option-button ${selectedOption === 'scripts' ? 'active' : ''}`}
+                            onClick={() => {
+                                handleOptionSelection('scripts');
+                                fetchScript(selectedStage.toLowerCase()); // Fetch script when "Scripts" option is selected
+                            }}
                         >
-                            Go to Next Stage
+                            Scripts
+                        </button>
+                        <button
+                            type="button"
+                            className={`option-button ${selectedOption === 'tools' ? 'active' : ''}`}
+                            onClick={() => handleOptionSelection('tools')}
+                        >
+                            External Tools
                         </button>
                     </div>
-                </form>
+                </div>
             )}
 
             {/* Display fetched script */}
