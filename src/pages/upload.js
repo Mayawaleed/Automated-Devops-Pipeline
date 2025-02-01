@@ -305,6 +305,20 @@ const Upload = () => {
         }
     };
 
+    // Move to the next stage
+    const goToNextStage = () => {
+        const currentIndex = stages.indexOf(selectedStage);
+        if (currentIndex < stages.length - 1) {
+            const nextStage = stages[currentIndex + 1];
+            setSelectedStage(nextStage); // Move to next stage
+            setScriptContent(''); // Reset script content when changing stage
+            setScriptFetched(false); // Reset script fetched status
+            setSelectedOption(''); // Reset selected option
+        } else {
+            alert('You are already at the last stage.');
+        }
+    };
+
     return (
         <div className="upload-container">
             <h1>Select Pipeline Stage</h1>
@@ -358,6 +372,18 @@ const Upload = () => {
 
             {/* Display error message */}
             {error && <p style={{ color: 'red' }}>{error}</p>}
+
+            {/* Go to Next Stage button */}
+            {selectedStage && (
+                <div>
+                    <button
+                        onClick={goToNextStage}
+                        disabled={!selectedStage} // Disable if no stage is selected
+                    >
+                        Go to Next Stage
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
