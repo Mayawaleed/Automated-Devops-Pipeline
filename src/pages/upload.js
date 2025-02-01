@@ -265,8 +265,6 @@ const Upload = () => {
     const [loading, setLoading] = useState(false); // To track loading state
     const [error, setError] = useState(null); // To track errors
     const [scriptFetched, setScriptFetched] = useState(false); // To track if the script is successfully fetched
-    const [toolsFetched, setToolsFetched] = useState(false); // To track if tools are successfully fetched
-    const [toolsContent, setToolsContent] = useState(''); // State to hold tools content
 
     // When stage is selected, reset states
     const handleStageSelection = (stage) => {
@@ -275,8 +273,6 @@ const Upload = () => {
         setScriptContent(''); // Reset script content when stage changes
         setError(null); // Clear previous errors
         setScriptFetched(false); // Reset script fetched status
-        setToolsFetched(false); // Reset tools fetched status
-        setToolsContent(''); // Reset tools content
     };
 
     const handleOptionSelection = (option) => {
@@ -290,9 +286,6 @@ const Upload = () => {
         if (selectedOption === 'scripts') {
             // Fetch script when the "Scripts" option is selected
             fetchScript(selectedStage.toLowerCase());
-        } else if (selectedOption === 'tools') {
-            // Fetch tools when the "Tools" option is selected
-            fetchTools(selectedStage.toLowerCase());
         }
 
         // Always allow proceeding to the next stage regardless of whether a script was selected
@@ -307,7 +300,9 @@ const Upload = () => {
 
         try {
             console.log(`Fetching script for stage: ${stage}`); // Debugging line
-            const response = await fetch(`http://127.0.0.1:8000/api/get_scripts/${stage}/`);
+
+            // Ensure the stage is being passed as a lowercase string (or format it as needed)
+            const response = await fetch(`http://127.0.0.1:8000/api/get_scripts/${stage.toLowerCase()}/`);
             const data = await response.json();
 
             if (response.ok && data.length > 0) {
@@ -317,31 +312,8 @@ const Upload = () => {
                 setError('No scripts found for this stage.');
             }
         } catch (error) {
+            console.error('Error fetching script:', error); // Log the error for debugging
             setError('Failed to fetch the script.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Fetch the tools based on the stage
-    const fetchTools = async (stage) => {
-        setLoading(true);
-        setError(null); // Clear any previous errors
-        setToolsFetched(false); // Reset the fetch status before trying
-
-        try {
-            console.log(`Fetching tools for stage: ${stage}`); // Debugging line
-            const response = await fetch(`http://127.0.0.1:8000/api/get_tools/${stage}/`);
-            const data = await response.json();
-
-            if (response.ok && data.length > 0) {
-                setToolsContent(data.map((tool) => `${tool.name}: ${tool.url}`).join('\n')); // Assuming 'name' and 'url' are in the response
-                setToolsFetched(true); // Mark the tools as fetched
-            } else {
-                setError('No tools found for this stage.');
-            }
-        } catch (error) {
-            setError('Failed to fetch tools.');
         } finally {
             setLoading(false);
         }
@@ -404,14 +376,6 @@ const Upload = () => {
                 </div>
             )}
 
-            {/* Display fetched tools */}
-            {toolsFetched && toolsContent && (
-                <div className="tools-content">
-                    <h3>External Tools:</h3>
-                    <pre>{toolsContent}</pre>
-                </div>
-            )}
-
             {/* Loading spinner */}
             {loading && <p>Loading...</p>}
 
@@ -422,6 +386,7 @@ const Upload = () => {
 };
 
 export default Upload;
+
 
 
 
