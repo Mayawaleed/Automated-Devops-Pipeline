@@ -74,6 +74,104 @@ h1 {
     background-color: #005bb5;
 }
 
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.stage-buttons, .option-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;  /* Very minimal space between stages and form */
+}
+
+.stage-button, .option-button {
+    padding: 10px 20px;
+    margin: 3px;  /* Reduced margin for less space */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.stage-button {
+    background-color: #0070f3;
+    color: white;
+}
+
+.stage-button.active, .option-button.active {
+    background-color: #005bb5;
+}
+
+.stage-button:hover, .option-button:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+}
+
+.upload-form {
+    margin-top: 5px;  /* Minimal gap between form and buttons */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+.upload-form button {
+    padding: 10px 20px;
+    margin-top: 5px;  /* Reduced gap between form and button */
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-form button:disabled {
+    background-color: #ccc;
+}
+
+.upload-form button:hover:not(:disabled) {
+    background-color: #005bb5;
+}
+.nextStageButton {
+    padding: 8px 16px;
+    background-color: #0070f3; /* Same color as the stage buttons */
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+}
+
+.nextStageButton:hover {
+    background-color: #005bb5; /* Darker shade on hover */
+    transform: scale(1.05);
+}
+
+.nextStageButton:active {
+    background-color: #005bb5; /* Keep the same color when active */
+    transform: scale(1);
+}
 /* Footer styling */
 .footer {
     text-align: center;
@@ -82,3 +180,4 @@ h1 {
     background-color: #333;
     color: white;
 }
+
