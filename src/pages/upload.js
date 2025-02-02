@@ -379,7 +379,7 @@ const Upload = () => {
                     <button
                         onClick={goToNextStage}
                         disabled={!selectedStage} // Disable if no stage is selected
-                        className="nextStageButton"
+                        // className="nextStageButton"
                     >
                         Go to Next Stage
                     </button>
