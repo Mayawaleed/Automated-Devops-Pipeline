@@ -1,15 +1,15 @@
-// src/components/SignIn.js
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import axios from 'axios';
 import styles from '../styles/signIn.module.css';
+import { useRouter } from 'next/router';
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-    const router = useRouter(); // Initialize useRouter
+    const router = useRouter();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!username || !password) {
@@ -17,13 +17,27 @@ const SignIn = () => {
             return;
         }
 
-        // Handle the sign-in logic here (e.g., validate credentials)
-        console.log(`Signing in with username: ${username}`);
+        // Prepare the data for sending to the backend
+        const userData = {
+            username,
+            password
+        };
 
-        setMessage('Successfully signed in!');
+        try {
+            // Make the API call to the backend
+            const response = await axios.post('http://localhost:8000/api/login/', userData);
 
-        // Redirect to the home page after successful login
-        router.push('/'); // This will navigate to the home page
+            // Check if login was successful
+            if (response.status === 200) {
+                setMessage('Successfully signed in!');
+                // Redirect to the home page after successful login
+                router.push('/');
+            }
+        } catch (err) {
+            // Handle errors
+            console.error('Error signing in:', err);
+            setMessage('Failed to sign in. Please check your credentials and try again.');
+        }
     };
 
     return (
