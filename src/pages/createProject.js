@@ -61,8 +61,10 @@
 // };
 
 // export default CreateProject;
+
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import styles from '../styles/projectCreate.module.css';
 
 const CreateProject = () => {
@@ -74,21 +76,47 @@ const CreateProject = () => {
     const [deployment, setDeployment] = useState('');
     const [testing, setTesting] = useState('');
     const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
     const router = useRouter(); // Initialize router
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Check that all fields are filled in
         if (!projectName || !projectType || !language || !framework || !hosting || !deployment || !testing) {
-            setMessage('Please fill in all fields before proceeding.');
+            setError('Please fill in all fields before proceeding.');
             return;
         }
-        
-        setMessage(`Project "${projectName}" created successfully!`);
 
-        // Redirect to upload page after 2 seconds
-        setTimeout(() => {
-            router.push('/upload');
-        }, 2000);
+        // Create the project data object to match your backend serializer's fields
+        const projectData = {
+            project_name: projectName,
+            project_type: projectType,
+            programming_language: language,
+            framework: framework,
+            hosting_platform: hosting,
+            deployment_type: deployment,
+            testing_needs: testing,
+            // Optionally, you can also include the selected_stage, selected_option, script, or tool fields if needed.
+            // For now, we assume these fields may be managed later (or set to defaults) on the backend.
+        };
+
+        try {
+            // Send the POST request to your Django backend API endpoint
+            const response = await axios.post('http://localhost:8000/api/projectdetails/', projectData);
+            
+            // If the response is successful, show success message
+            setMessage(`Project "${projectName}" created successfully!`);
+
+            // Redirect to the upload page after 2 seconds
+            setTimeout(() => {
+                router.push('/upload');
+            }, 2000);
+        } catch (err) {
+            // Handle errors
+            console.error('Error creating project:', err);
+            setError('Failed to create project. Please try again.');
+        }
     };
 
     return (
@@ -174,7 +202,8 @@ const CreateProject = () => {
                 />
 
                 <button type="submit" className={styles.createButton}>Create Project</button>
-                {message && <p className={message.includes('successfully') ? styles.success : styles.error}>{message}</p>}
+                {message && <p className={styles.success}>{message}</p>}
+                {error && <p className={styles.error}>{error}</p>}
             </form>
         </div>
     );

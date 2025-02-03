@@ -247,146 +247,139 @@
 
 // export default Upload;
 
-import { useState } from 'react';
+// src/components/Upload.js
+import React, { useState } from "react";
+import { getScripts } from "../services/scriptsService"; // Import getScripts from the service
 
 const stages = [
-    'Planning',
-    'Development',
-    'Testing',
-    'Deployment',
-    'Monitoring',
-    'All Stages'
+  'Planning',
+  'Development',
+  'Testing',
+  'Deployment',
+  'Monitoring',
+  'All Stages'
 ];
 
 const Upload = () => {
-    const [selectedStage, setSelectedStage] = useState('');
-    const [selectedOption, setSelectedOption] = useState('');
-    const [scriptContent, setScriptContent] = useState(''); // State to hold script content
-    const [loading, setLoading] = useState(false); // To track loading state
-    const [error, setError] = useState(null); // To track errors
-    const [scriptFetched, setScriptFetched] = useState(false); // To track if the script is successfully fetched
+  const [selectedStage, setSelectedStage] = useState('');
+  const [selectedOption, setSelectedOption] = useState('');
+  const [scriptContent, setScriptContent] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [scriptFetched, setScriptFetched] = useState(false);
 
-    // When stage is selected, reset states
-    const handleStageSelection = (stage) => {
-        setSelectedStage(stage);
-        setSelectedOption(''); // Reset option when stage is selected
-        setScriptContent(''); // Reset script content when stage changes
-        setError(null); // Clear previous errors
-        setScriptFetched(false); // Reset script fetched status
-    };
+  const handleStageSelection = (stage) => {
+    setSelectedStage(stage);
+    setSelectedOption('');
+    setScriptContent('');
+    setError(null);
+    setScriptFetched(false);
+  };
 
-    const handleOptionSelection = (option) => {
-        setSelectedOption(option);
-    };
+  const handleOptionSelection = (option) => {
+    setSelectedOption(option);
+  };
 
-    // Fetch the script based on the stage
-    const fetchScript = async (stage) => {
-        setLoading(true);
-        setError(null); // Clear any previous errors
-        setScriptFetched(false); // Reset the fetch status before trying
+  const fetchScript = async (stage) => {
+    setLoading(true);
+    setError(null);
+    setScriptFetched(false);
 
-        try {
-            console.log(`Fetching script for stage: ${stage}`);
+    try {
+      console.log(`Fetching script for stage: ${stage}`);
+      
+      const data = await getScripts(stage); // Call getScripts from the service
 
-            const response = await fetch(`http://127.0.0.1:8000/api/get_scripts/${stage.toLowerCase()}/`);
-            const data = await response.json();
+      if (data.length > 0) {
+        setScriptContent(data[0].script_link); // Assuming 'script_link' is the field in your response
+        setScriptFetched(true);
+      } else {
+        setError('No scripts found for this stage.');
+      }
+    } catch (error) {
+      console.error('Error fetching script:', error);
+      setError('Failed to fetch the script.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            if (response.ok && data.length > 0) {
-                setScriptContent(data[0].script_link); // Assuming 'script_link' is the field in your response
-                setScriptFetched(true); // Mark the script as fetched
-            } else {
-                setError('No scripts found for this stage.');
-            }
-        } catch (error) {
-            console.error('Error fetching script:', error);
-            setError('Failed to fetch the script.');
-        } finally {
-            setLoading(false);
-        }
-    };
+  const goToNextStage = () => {
+    const currentIndex = stages.indexOf(selectedStage);
+    if (currentIndex < stages.length - 1) {
+      const nextStage = stages[currentIndex + 1];
+      setSelectedStage(nextStage);
+      setScriptContent('');
+      setScriptFetched(false);
+      setSelectedOption('');
+    } else {
+      alert('You are already at the last stage.');
+    }
+  };
 
-    // Move to the next stage
-    const goToNextStage = () => {
-        const currentIndex = stages.indexOf(selectedStage);
-        if (currentIndex < stages.length - 1) {
-            const nextStage = stages[currentIndex + 1];
-            setSelectedStage(nextStage); // Move to next stage
-            setScriptContent(''); // Reset script content when changing stage
-            setScriptFetched(false); // Reset script fetched status
-            setSelectedOption(''); // Reset selected option
-        } else {
-            alert('You are already at the last stage.');
-        }
-    };
+  return (
+    <div className="upload-container">
+      <h1>Select Pipeline Stage</h1>
+      <div className="stage-buttons">
+        {stages.map((stage) => (
+          <button
+            key={stage}
+            className={`stage-button ${selectedStage === stage ? 'active' : ''}`}
+            onClick={() => handleStageSelection(stage)}
+          >
+            {stage}
+          </button>
+        ))}
+      </div>
 
-    return (
-        <div className="upload-container">
-            <h1>Select Pipeline Stage</h1>
-            <div className="stage-buttons">
-                {stages.map((stage) => (
-                    <button
-                        key={stage}
-                        className={`stage-button ${selectedStage === stage ? 'active' : ''}`}
-                        onClick={() => handleStageSelection(stage)}
-                    >
-                        {stage}
-                    </button>
-                ))}
-            </div>
-
-            {selectedStage && (
-                <div>
-                    <h4>Choose between:</h4>
-                    <div className="option-buttons">
-                        <button
-                            type="button"
-                            className={`option-button ${selectedOption === 'scripts' ? 'active' : ''}`}
-                            onClick={() => {
-                                handleOptionSelection('scripts');
-                                fetchScript(selectedStage.toLowerCase()); // Fetch script when "Scripts" option is selected
-                            }}
-                        >
-                            Scripts
-                        </button>
-                        <button
-                            type="button"
-                            className={`option-button ${selectedOption === 'tools' ? 'active' : ''}`}
-                            onClick={() => handleOptionSelection('tools')}
-                        >
-                            External Tools
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* Display fetched script */}
-            {scriptFetched && scriptContent && (
-                <div className="script-content">
-                    <h3>Script Content:</h3>
-                    <pre>{scriptContent}</pre>
-                </div>
-            )}
-
-            {/* Loading spinner */}
-            {loading && <p>Loading...</p>}
-
-            {/* Display error message */}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            {/* Go to Next Stage button */}
-            {selectedStage && (
-                <div>
-                    <button
-                        onClick={goToNextStage}
-                        disabled={!selectedStage} // Disable if no stage is selected
-                        // className="nextStageButton"
-                    >
-                        Go to Next Stage
-                    </button>
-                </div>
-            )}
+      {selectedStage && (
+        <div>
+          <h4>Choose between:</h4>
+          <div className="option-buttons">
+            <button
+              type="button"
+              className={`option-button ${selectedOption === 'scripts' ? 'active' : ''}`}
+              onClick={() => {
+                handleOptionSelection('scripts');
+                fetchScript(selectedStage.toLowerCase());
+              }}
+            >
+              Scripts
+            </button>
+            <button
+              type="button"
+              className={`option-button ${selectedOption === 'tools' ? 'active' : ''}`}
+              onClick={() => handleOptionSelection('tools')}
+            >
+              External Tools
+            </button>
+          </div>
         </div>
-    );
+      )}
+
+      {scriptFetched && scriptContent && (
+        <div className="script-content">
+          <h3>Script Content:</h3>
+          <pre>{scriptContent}</pre>
+        </div>
+      )}
+
+      {loading && <p>Loading...</p>}
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {selectedStage && (
+        <div>
+          <button
+            onClick={goToNextStage}
+            disabled={!selectedStage}
+          >
+            Go to Next Stage
+          </button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Upload;
