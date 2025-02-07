@@ -248,6 +248,276 @@
 // export default Upload;
 
 // src/components/Upload.js
+// import React, { useState } from "react";
+// import { getScripts } from "../services/scriptsService"; // Import getScripts from the service
+
+// const stages = [
+//   'Planning',
+//   'Development',
+//   'Testing',
+//   'Deployment',
+//   'Monitoring',
+//   'All Stages'
+// ];
+
+// const Upload = () => {
+//   const [selectedStage, setSelectedStage] = useState('');
+//   const [selectedOption, setSelectedOption] = useState('');
+//   const [scriptContent, setScriptContent] = useState('');
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(null);
+//   const [scriptFetched, setScriptFetched] = useState(false);
+
+//   const handleStageSelection = (stage) => {
+//     setSelectedStage(stage);
+//     setSelectedOption('');
+//     setScriptContent('');
+//     setError(null);
+//     setScriptFetched(false);
+//   };
+
+//   const handleOptionSelection = (option) => {
+//     setSelectedOption(option);
+//   };
+
+//   const fetchScript = async (stage) => {
+//     setLoading(true);
+//     setError(null);
+//     setScriptFetched(false);
+
+//     try {
+//       console.log(`Fetching script for stage: ${stage}`);
+      
+//       const data = await getScripts(stage); // Call getScripts from the service
+
+//       if (data.length > 0) {
+//         setScriptContent(data[0].script_link); // Assuming 'script_link' is the field in your response
+//         setScriptFetched(true);
+//       } else {
+//         setError('No scripts found for this stage.');
+//       }
+//     } catch (error) {
+//       console.error('Error fetching script:', error);
+//       setError('Failed to fetch the script.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const goToNextStage = () => {
+//     const currentIndex = stages.indexOf(selectedStage);
+//     if (currentIndex < stages.length - 1) {
+//       const nextStage = stages[currentIndex + 1];
+//       setSelectedStage(nextStage);
+//       setScriptContent('');
+//       setScriptFetched(false);
+//       setSelectedOption('');
+//     } else {
+//       alert('You are already at the last stage.');
+//     }
+//   };
+
+//   return (
+//     <div className="upload-container">
+//       <h1>Select Pipeline Stage</h1>
+//       <div className="stage-buttons">
+//         {stages.map((stage) => (
+//           <button
+//             key={stage}
+//             className={`stage-button ${selectedStage === stage ? 'active' : ''}`}
+//             onClick={() => handleStageSelection(stage)}
+//           >
+//             {stage}
+//           </button>
+//         ))}
+//       </div>
+
+//       {selectedStage && (
+//         <div>
+//           <h4>Choose between:</h4>
+//           <div className="option-buttons">
+//             <button
+//               type="button"
+//               className={`option-button ${selectedOption === 'scripts' ? 'active' : ''}`}
+//               onClick={() => {
+//                 handleOptionSelection('scripts');
+//                 fetchScript(selectedStage.toLowerCase());
+//               }}
+//             >
+//               Scripts
+//             </button>
+//             <button
+//               type="button"
+//               className={`option-button ${selectedOption === 'tools' ? 'active' : ''}`}
+//               onClick={() => handleOptionSelection('tools')}
+//             >
+//               External Tools
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       {scriptFetched && scriptContent && (
+//         <div className="script-content">
+//           <h3>Script Content:</h3>
+//           <pre>{scriptContent}</pre>
+//         </div>
+//       )}
+
+//       {loading && <p>Loading...</p>}
+
+//       {error && <p style={{ color: 'red' }}>{error}</p>}
+
+//       {selectedStage && (
+//         <div>
+//           <button
+//             onClick={goToNextStage}
+//             disabled={!selectedStage}
+//           >
+//             Go to Next Stage
+//           </button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Upload;
+
+// import { useState, useEffect } from 'react';
+// import { useRouter } from 'next/router';
+// import axios from 'axios';
+// import styles from '../styles/projectCreate.module.css';
+
+// const getScripts = async (stage, projectId) => {
+//     try {
+//         const response = await axios.post('http://localhost:8000/api/generate_script/', {
+//             stage,
+//             projectId, // Pass the project ID along with the request
+//         });
+
+//         return response.data;
+//     } catch (error) {
+//         console.error('Error fetching scripts:', error);
+//         throw error;
+//     }
+// };
+
+// const Upload = () => {
+//     const [selectedStage, setSelectedStage] = useState('');
+//     const [scriptContent, setScriptContent] = useState('');
+//     const [loading, setLoading] = useState(false);
+//     const [error, setError] = useState(null);
+//     const [scriptFetched, setScriptFetched] = useState(false);
+//     const [projectId, setProjectId] = useState(''); // Ensure you have the projectId available
+
+//     const router = useRouter();
+
+//     useEffect(() => {
+//         // If the projectId is passed through the URL or as a query parameter, set it here
+//         if (router.query.projectId) {
+//             setProjectId(router.query.projectId);
+//         }
+//     }, [router.query.projectId]);
+
+//     // Stages for the pipeline or project setup
+//     const stages = ['Build', 'Deploy', 'Test']; // Example stages
+
+//     const handleStageSelection = (stage) => {
+//         setSelectedStage(stage);
+//         setScriptContent('');
+//         setError(null);
+//         setScriptFetched(false);
+//     };
+
+//     const fetchScript = async () => {
+//         setLoading(true);
+//         setError(null);
+//         setScriptFetched(false);
+
+//         try {
+//             // Send selectedStage and projectId to the backend
+//             const response = await getScripts(selectedStage, projectId);
+//             if (response && response.script) {
+//                 setScriptContent(response.script);
+//                 setScriptFetched(true);
+//             } else {
+//                 setError('No scripts found for this stage.');
+//             }
+//         } catch (error) {
+//             setError('Failed to fetch the script.');
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     const goToNextStage = () => {
+//         const currentIndex = stages.indexOf(selectedStage);
+//         if (currentIndex < stages.length - 1) {
+//             const nextStage = stages[currentIndex + 1];
+//             setSelectedStage(nextStage);
+//             setScriptContent('');
+//             setScriptFetched(false);
+//         } else {
+//             alert('You are already at the last stage.');
+//         }
+//     };
+
+//     return (
+//         <div className={styles.uploadContainer}>
+//             <h1>Upload Project and Generate Scripts</h1>
+
+//             {/* Stage selection */}
+//             <div>
+//                 <h3>Select a stage</h3>
+//                 {stages.map((stage, index) => (
+//                     <button
+//                         key={index}
+//                         onClick={() => handleStageSelection(stage)}
+//                         className={selectedStage === stage ? styles.selected : ''}
+//                     >
+//                         {stage}
+//                     </button>
+//                 ))}
+//             </div>
+
+//             {/* Fetch script button */}
+//             {selectedStage && (
+//                 <button
+//                     onClick={fetchScript}
+//                     className={styles.fetchButton}
+//                     disabled={loading}
+//                 >
+//                     {loading ? 'Fetching...' : 'Fetch Script'}
+//                 </button>
+//             )}
+
+//             {/* Displaying script content */}
+//             {scriptFetched && (
+//                 <div>
+//                     <h3>Generated Script:</h3>
+//                     <pre>{scriptContent}</pre>
+//                 </div>
+//             )}
+
+//             {/* Displaying error */}
+//             {error && <p className={styles.error}>{error}</p>}
+
+//             {/* Next stage button */}
+//             {selectedStage && !loading && (
+//                 <button
+//                     onClick={goToNextStage}
+//                     className={styles.nextButton}
+//                 >
+//                     Go to Next Stage
+//                 </button>
+//             )}
+//         </div>
+//     );
+// };
+
+
+// export default Upload;
 import React, { useState } from "react";
 import { getScripts } from "../services/scriptsService"; // Import getScripts from the service
 
