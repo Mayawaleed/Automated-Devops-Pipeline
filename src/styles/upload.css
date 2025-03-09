@@ -1,4 +1,4 @@
-.upload-container {
+/* .upload-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -20,12 +20,12 @@ h1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 5px;  /* Very minimal space between stages and form */
+    margin-bottom: 5px; 
 }
 
 .stage-button, .option-button {
     padding: 10px 20px;
-    margin: 3px;  /* Reduced margin for less space */
+    margin: 3px; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -47,7 +47,7 @@ h1 {
 }
 
 .upload-form {
-    margin-top: 5px;  /* Minimal gap between form and buttons */
+    margin-top: 5px;  
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -57,7 +57,7 @@ h1 {
 
 .upload-form button {
     padding: 10px 20px;
-    margin-top: 5px;  /* Reduced gap between form and button */
+    margin-top: 5px; 
     background-color: #0070f3;
     color: white;
     border: none;
@@ -96,12 +96,12 @@ h1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 5px;  /* Very minimal space between stages and form */
+    margin-bottom: 5px;  
 }
 
 .stage-button, .option-button {
     padding: 10px 20px;
-    margin: 3px;  /* Reduced margin for less space */
+    margin: 3px;  
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -123,7 +123,7 @@ h1 {
 }
 
 .upload-form {
-    margin-top: 5px;  /* Minimal gap between form and buttons */
+    margin-top: 5px;  
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -133,7 +133,7 @@ h1 {
 
 .upload-form button {
     padding: 10px 20px;
-    margin-top: 5px;  /* Reduced gap between form and button */
+    margin-top: 5px; 
     background-color: #0070f3;
     color: white;
     border: none;
@@ -151,7 +151,7 @@ h1 {
 }
 .nextStageButton {
     padding: 8px 16px;
-    background-color: #0070f3; /* Same color as the stage buttons */
+    background-color: #0070f3; 
     color: white;
     font-size: 1rem;
     font-weight: 600;
@@ -164,20 +164,115 @@ h1 {
 }
 
 .nextStageButton:hover {
-    background-color: #005bb5; /* Darker shade on hover */
+    background-color: #005bb5; 
     transform: scale(1.05);
 }
 
 .nextStageButton:active {
-    background-color: #005bb5; /* Keep the same color when active */
+    background-color: #005bb5; 
     transform: scale(1);
 }
-/* Footer styling */
+
 .footer {
     text-align: center;
     margin-top: auto;
     padding: 10px;
     background-color: #333;
     color: white;
-}
+} */
 
+
+.upload-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .stage-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .stage-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .stage-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .stage-button.active {
+    background-color: #28a745;
+  }
+  
+  .script-content {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .script-content h3 {
+    margin-bottom: 10px;
+  }
+  
+  .script-display {
+    background-color: #282c34;
+    color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    white-space: pre-wrap; /* Allows the text to wrap and be readable */
+    word-wrap: break-word;
+    border: 1px solid #444;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:active {
+    background-color: #003c75;
+  }
+  
+  .tool-card {
+    text-align: center;
+    margin: 10px;
+  }
+  
+  .tool-image {
+    width: 120px; 
+    height: 120px;
+    object-fit: cover; 
+    display: block;
+  }
+  
+  .tool-recommendations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tool-card h4 {
+    margin-top: 10px;
+  }
