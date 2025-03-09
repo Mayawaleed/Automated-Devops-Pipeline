@@ -57,20 +57,6 @@ export const generateScript = async (data) => {
 
 
 
-// export const getScripts = async (projectId, stageId) => {
-//   // Validate that projectId and stageId are provided
-//   if (!projectId || !stageId) {
-//     console.error("Invalid projectId or stageId:", projectId, stageId);
-//     return null; // Return early if data is invalid
-//   }
-
-//   // Construct the URL for fetching scripts
-//   const url = `http://localhost:8000/api/projectdetails/${projectId}/scripts/?stage_id=${stageId}`;
-//   console.log("Fetching script from:", url); // Debugging log
-
-//   try {
-//     const response = await axios.get(url); // Make the API request
-//     console.log("Received script data:", response.data); // Log the full response for debugging
 
 //     // Ensure the response contains the expected structure and return the script content
 //     if (response.data && response.data.script_content) {
