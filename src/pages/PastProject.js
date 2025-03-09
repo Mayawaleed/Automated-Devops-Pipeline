@@ -1,6 +1,6 @@
-import styles from '../styles/Dashboard.module.css';
+import styles from '../styles/PastProject.module.css';
 
-const Dashboard = () => {
+const PastProject = () => {
   const projects = [
     { id: 1, name: 'Project 1', type: 'C++' },
     { id: 2, name: 'Project 2', type: 'Python' },
@@ -23,4 +23,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default PastProject;
