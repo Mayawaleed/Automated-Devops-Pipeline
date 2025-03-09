@@ -105,12 +105,6 @@ export const generateScript = async (data) => {
 
 
 
-// export const getScripts = async (projectId, stageId) => {
-//   // Validate that projectId and stageId are provided
-//   if (!projectId || !stageId) {
-//     console.error("Invalid projectId or stageId:", projectId, stageId);
-//     return null; // Return early if data is invalid
-//   }
 
 //   // Construct the URL for fetching scripts
 //   const url = `http://localhost:8000/api/projectdetails/${projectId}/scripts/?stage_id=${stageId}`;
