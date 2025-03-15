@@ -6,11 +6,11 @@ const DownloadMonitoringTool = () => {
         <div className={styles.container}>
             <h1 className={styles.title}>Download Monitoring Tool</h1>
             <p className={styles.description}>
-               download our powerful tool
+                Download our powerful tool to start monitoring your system.
             </p>
             <div className={styles.buttonContainer}>
                 <a
-                      href="/path/to/monitoring-tool.zip"//Replace with actual file path
+                    href="https://drive.google.com/uc?export=download&id=1pWNJari-Dj-FYnvKkEVWp8H9U4iXaT-K" // Direct download link
                     download
                     className={styles.downloadButton}
                 >
