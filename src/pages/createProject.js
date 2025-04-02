@@ -330,7 +330,7 @@ const CreateProject = () => {
                 <label htmlFor="hosting">Hosting Platform:</label>
                 <select id="hosting" value={hosting} onChange={(e) => setHosting(e.target.value)}></select>
                 <option value="">Select hosting platform</option>
-                
+                {hostingPlatforms.map((hp) => <option key={hp} value={hp}>{hp}</option>)}
                 
 
                 <label htmlFor="deployment">Deployment Type:</label>
