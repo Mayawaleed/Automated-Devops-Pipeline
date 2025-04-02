@@ -328,6 +328,7 @@ const CreateProject = () => {
                     </select>
 
                 <label htmlFor="hosting">Hosting Platform:</label>
+                <select id="hosting" value={hosting} onChange={(e) => setHosting(e.target.value)}></select>
 
                 
 
