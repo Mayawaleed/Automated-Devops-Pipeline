@@ -257,18 +257,23 @@ const CreateProject = () => {
     const [testing, setTesting] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const router = useRouter(); // Initialize router
+    const router = useRouter();
+
+    const projectTypes = ['Web', 'Mobile', 'API', 'Desktop'];
+    const languages = ['JavaScript', 'Python', 'Java', 'C++', 'Ruby', 'PHP', 'Go', 'Swift'];
+    const frameworks = ['React', 'Vue', 'Angular', 'Django', 'Flask', 'Laravel', 'Spring Boot', 'Express.js'];
+    const hostingPlatforms = ['AWS', 'Vercel', 'Netlify', 'Heroku', 'Azure', 'Google Cloud', 'DigitalOcean'];
+    const deployments = ['CI/CD', 'Manual', 'Containerized (Docker/Kubernetes)'];
+    const testingNeeds = ['Unit tests', 'Integration tests', 'End-to-End tests', 'Performance testing', 'Security testing'];
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Check that all fields are filled in
         if (!projectName || !projectType || !language || !framework || !hosting || !deployment || !testing) {
             setError('Please fill in all fields before proceeding.');
             return;
         }
 
-        // Create the project data object to match your backend serializer's fields
         const projectData = {
             project_name: projectName,
             project_type: projectType,
@@ -277,22 +282,15 @@ const CreateProject = () => {
             hosting_platform: hosting,
             deployment_type: deployment,
             testing_needs: testing,
-            
         };
 
         try {
-            // Send the POST request to your Django backend API endpoint
             const response = await axios.post('http://localhost:8000/api/projectdetails/', projectData);
-            
-            // If the response is successful, show success message
-            setMessage('Project "${projectName}" created successfully!');
-
-            // Redirect to the upload page after 2 seconds
+            setMessage(`Project "${projectName}" created successfully!`);
             setTimeout(() => {
                 router.push('/upload');
             }, 2000);
         } catch (err) {
-            // Handle errors
             console.error('Error creating project:', err);
             setError('Failed to create project. Please try again.');
         }
@@ -312,73 +310,29 @@ const CreateProject = () => {
                 />
 
                 <label htmlFor="projectType">Project Type:</label>
-                <select
-                    id="projectType"
-                    value={projectType}
-                    onChange={(e) => setProjectType(e.target.value)}
-                >
+                <select id="projectType" value={projectType} onChange={(e) => setProjectType(e.target.value)}>
                     <option value="">Select project type</option>
-                    <option value="Web">Web</option>
-                    <option value="Mobile">Mobile</option>
-                    <option value="API">API</option>
-                    <option value="Desktop">Desktop</option>
+                    {projectTypes.map((type) => <option key={type} value={type}>{type}</option>)}
                 </select>
 
                 <label htmlFor="language">Programming Language:</label>
-                <select
-                    id="language"
-                    value={language}
-                    onChange={(e) => setLanguage(e.target.value)}
-                >
+                <select id="language" value={language} onChange={(e) => setLanguage(e.target.value)}>
                     <option value="">Select language</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="Python">Python</option>
-                    <option value="Java">Java</option>
-                    <option value="C++">C++</option>
-                    <option value="Ruby">Ruby</option>
-                    <option value="PHP">PHP</option>
-                    <option value="Go">Go</option>
-                    <option value="Swift">Swift</option>
+                    {languages.map((lang) => <option key={lang} value={lang}>{lang}</option>)}
                 </select>
 
-                <label htmlFor="framework">Framework:</label>
-                <input
-                    type="text"
-                    id="framework"
-                    value={framework}
-                    onChange={(e) => setFramework(e.target.value)}
-                    placeholder="Enter framework (e.g., React, Django, Laravel)"
-                />
-
-                <label htmlFor="hosting">Hosting Platform:</label>
-                <input
-                    type="text"
-                    id="hosting"
-                    value={hosting}
-                    onChange={(e) => setHosting(e.target.value)}
-                    placeholder="Enter hosting platform (e.g., AWS, Vercel, Netlify)"
-                />
 
                 <label htmlFor="deployment">Deployment Type:</label>
-                <select
-                    id="deployment"
-                    value={deployment}
-                    onChange={(e) => setDeployment(e.target.value)}
-                >
+                <select id="deployment" value={deployment} onChange={(e) => setDeployment(e.target.value)}>
                     <option value="">Select deployment type</option>
-                    <option value="CI/CD">CI/CD</option>
-                    <option value="Manual">Manual</option>
-                    <option value="Containerized">Containerized (Docker/Kubernetes)</option>
+                    {deployments.map((dep) => <option key={dep} value={dep}>{dep}</option>)}
                 </select>
 
                 <label htmlFor="testing">Testing Needs:</label>
-                <input
-                    type="text"
-                    id="testing"
-                    value={testing}
-                    onChange={(e) => setTesting(e.target.value)}
-                    placeholder="Enter testing needs (e.g., Unit tests, Integration tests)"
-                />
+                <select id="testing" value={testing} onChange={(e) => setTesting(e.target.value)}>
+                    <option value="">Select testing needs</option>
+                    {testingNeeds.map((tn) => <option key={tn} value={tn}>{tn}</option>)}
+                </select>
 
                 <button type="submit" className={styles.createButton}>Create Project</button>
                 {message && <p className={styles.success}>{message}</p>}
@@ -389,6 +343,7 @@ const CreateProject = () => {
 };
 
 export default CreateProject;
+
 
 // import { useState, useEffect } from 'react';
 // import { useRouter } from 'next/router';
