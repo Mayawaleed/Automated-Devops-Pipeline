@@ -325,7 +325,11 @@ const CreateProject = () => {
                 <select id="framework" value={framework} onChange={(e) => setFramework(e.target.value)}>
                     <option value="">Select framework</option>
                     {frameworks.map((fw) => <option key={fw} value={fw}>{fw}</option>)}
-                    
+                    </select>
+
+                <label htmlFor="hosting">Hosting Platform:</label>
+
+                
 
                 <label htmlFor="deployment">Deployment Type:</label>
                 <select id="deployment" value={deployment} onChange={(e) => setDeployment(e.target.value)}>
