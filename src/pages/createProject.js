@@ -327,11 +327,11 @@ const CreateProject = () => {
                     {frameworks.map((fw) => <option key={fw} value={fw}>{fw}</option>)}
                     </select>
 
-                <label htmlFor="hosting">Hosting Platform:</label>
-                <select id="hosting" value={hosting} onChange={(e) => setHosting(e.target.value)}></select>
-                <option value="">Select hosting platform</option>
-                {hostingPlatforms.map((hp) => <option key={hp} value={hp}>{hp}</option>)}
-                
+                    <label htmlFor="hosting">Hosting Platform:</label>
+                <select id="hosting" value={hosting} onChange={(e) => setHosting(e.target.value)}>
+                    <option value="">Select hosting platform</option>
+                    {hostingPlatforms.map((hp) => <option key={hp} value={hp}>{hp}</option>)}
+                </select>
 
                 <label htmlFor="deployment">Deployment Type:</label>
                 <select id="deployment" value={deployment} onChange={(e) => setDeployment(e.target.value)}>
