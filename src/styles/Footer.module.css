@@ -1,5 +1,5 @@
 .footer {
-  background-image: url('/images/WHAT ARE JOB ROLES & RESPONSIBILITIES OF DEVOPS ENGINEERS_.jpg');
+  background-color: #92c3ee;
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -33,7 +33,7 @@
 }
 
 .StageLinks a {
-  color: #ddd; /* Light grey for links */
+  color: #fff9f9; /* Light grey for links */
   text-decoration: none;
 }
 
