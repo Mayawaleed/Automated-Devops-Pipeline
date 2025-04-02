@@ -16,7 +16,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <p>&copy; {new Date().getFullYear()} DevOps Optimizer. All Rights Reserved.</p>
+      <p>&copy; {new Date().getFullYear()} Automated Devops. All Rights Reserved.</p>
 
     </footer>
   );

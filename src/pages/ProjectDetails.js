@@ -245,9 +245,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import styles from '../styles/projectCreate.module.css';
+import styles from '../styles/createProjectmodule.css';
 
-const CreateProject = () => {
+const ProjectDetails = () => {
     const [projectName, setProjectName] = useState('');
     const [projectType, setProjectType] = useState('');
     const [language, setLanguage] = useState('');
@@ -286,19 +286,19 @@ const CreateProject = () => {
 
         try {
             const response = await axios.post('http://localhost:8000/api/projectdetails/', projectData);
-            setMessage(`Project "${projectName}" created successfully!`);
+            setMessage(`Project "${projectName}" details submitted successfully!`);
             setTimeout(() => {
                 router.push('/upload');
             }, 2000);
         } catch (err) {
-            console.error('Error creating project:', err);
-            setError('Failed to create project. Please try again.');
+            console.error('Error submitting project details:', err);
+            setError('Failed to submit project details. Please try again.');
         }
     };
 
     return (
         <div className={styles.createProjectContainer}>
-            <h1>Create a New Project</h1>
+            <h1>Enter Project Details</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <label htmlFor="projectName">Project Name:</label>
                 <input
@@ -325,9 +325,9 @@ const CreateProject = () => {
                 <select id="framework" value={framework} onChange={(e) => setFramework(e.target.value)}>
                     <option value="">Select framework</option>
                     {frameworks.map((fw) => <option key={fw} value={fw}>{fw}</option>)}
-                    </select>
+                </select>
 
-                    <label htmlFor="hosting">Hosting Platform:</label>
+                <label htmlFor="hosting">Hosting Platform:</label>
                 <select id="hosting" value={hosting} onChange={(e) => setHosting(e.target.value)}>
                     <option value="">Select hosting platform</option>
                     {hostingPlatforms.map((hp) => <option key={hp} value={hp}>{hp}</option>)}
@@ -345,7 +345,7 @@ const CreateProject = () => {
                     {testingNeeds.map((tn) => <option key={tn} value={tn}>{tn}</option>)}
                 </select>
 
-                <button type="submit" className={styles.createButton}>Create Project</button>
+                <button type="submit" className={styles.createButton}>Submit Details</button>
                 {message && <p className={styles.success}>{message}</p>}
                 {error && <p className={styles.error}>{error}</p>}
             </form>
@@ -353,7 +353,8 @@ const CreateProject = () => {
     );
 };
 
-export default CreateProject;
+export default ProjectDetails;
+
 
 
 // import { useState, useEffect } from 'react';
