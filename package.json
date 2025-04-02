@@ -9,11 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.2",
     "axios": "^1.7.9",
+    "class-variance-authority": "^0.7.1",
     "devops-upload-app": "file:",
     "dotenv": "^16.4.7",
+    "lucide-react": "^0.486.0",
     "next": "^15.0.1",
     "react": "^19.0.0-rc-69d4b800-20241021",
-    "react-dom": "^19.0.0-rc-69d4b800-20241021"
+    "react-dom": "^19.0.0-rc-69d4b800-20241021",
+    "react-router-dom": "^7.4.1",
+    "tailwind-merge": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4"
   }
 }

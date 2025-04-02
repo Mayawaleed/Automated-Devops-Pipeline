@@ -1,15 +1,16 @@
 /* General styling for the navbar */
 .navbar {
-  background-color: #333; /* Dark background for a sleek, professional look */
-  padding: 15px 30px; /* Ample padding for a spacious design */
+  background-image: url('/images/WHAT ARE JOB ROLES & RESPONSIBILITIES OF DEVOPS ENGINEERS_.jpg');  
+  padding: 15px 30px; /* Reduce padding */
+  height: 65px; /* Reduce height */
   display: flex;
-  justify-content: space-between; /* Spacing between links and button */
-  align-items: center; /* Align items in the center vertically */
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
-  border-bottom: 2px solid #444; /* Subtle border at the bottom */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25); /* Adjust shadow */
+  border-bottom: 2px solid #444; /* Slightly reduce border thickness */
 }
 
 /* Styling for logo (if needed) */
@@ -39,7 +40,7 @@
 .navbarLinks a {
   color: white;
   text-decoration: none; /* Remove underline */
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.5px; /* Space between letters */
