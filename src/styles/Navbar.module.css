@@ -75,7 +75,6 @@
   transform: scale(1.05); /* Zoom effect on hover */
 }
 
-/* Active state for the button (when clicked) */
 .navbarButton:active {
   background-color: #004088; /* Even darker blue */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow when clicked */
