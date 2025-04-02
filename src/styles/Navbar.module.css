@@ -56,8 +56,8 @@
 
 /* Styling for the 'Get Started' button */
 .navbarButton {
-  background-color: #0070f3; /* Blue background */
-  color: white;
+  background-color: #f3f5f7; /* Blue background */
+  color: rgb(10, 9, 9);
   padding: 10px 25px;
   border: none;
   border-radius: 50px; /* Rounded corners for modern look */
