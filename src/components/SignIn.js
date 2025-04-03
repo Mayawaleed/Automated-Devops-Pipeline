@@ -333,106 +333,120 @@
 //         </div>
 //     );
 // };
-
 // export default SignIn;
 
+// pages/signin.js
 import { useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/signIn.module.css';
 import { useRouter } from 'next/router';
 
 const SignIn = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        password: ''
-    });
-    const [message, setMessage] = useState('');
-    const router = useRouter();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+  const [message, setMessage] = useState('');
+  const router = useRouter();
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        const { username, password } = formData;
+    const { username, password } = formData;
 
-        if (!username || !password) {
-            setMessage('Please enter both username and password.');
-            return;
-        }
+    if (!username || !password) {
+      setMessage('Please enter both username and password.');
+      return;
+    }
 
-        try {
-            const response = await axios.post('http://127.0.0.1:8000/api/login/', {
-                username,
-                password
-            });
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+        username,
+        password,
+      });
 
-            if (response.status === 200) {
-                setMessage('Successfully signed in! Redirecting...');
-                
-                // Redirect to the home page
-                setTimeout(() => {
-                    router.push('/');
-                }, 2000);
-            }
-        } catch (err) {
-            if (err.response) {
-                setMessage(err.response.data.detail || 'Invalid credentials. Please try again.');
-            } else {
-                setMessage('Network error. Please check your connection.');
-            }
-        }
-    };
+      console.log('API Response Data:', response.data);
 
-    return (
-        <div className={styles.pageContainer}>
-            <div className={styles.signInContainer}>
-                {/* Sign-in form */}
-                <div className={styles.formContainer}>
-                    <h1 className={styles.heading}>Sign In</h1>
+      if (response.status === 200) {
+        setMessage('Successfully signed in! Redirecting...');
+        localStorage.setItem('authToken', response.data.access_token);
+        localStorage.setItem('username', username); // Store the username
 
-                    <form onSubmit={handleSubmit}>
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="username" className={styles.label}>Username:</label>
-                            <input
-                                type="text"
-                                id="username"
-                                name="username"
-                                value={formData.username}
-                                onChange={handleChange}
-                                className={styles.input}
-                                required
-                            />
-                        </div>
+        window.dispatchEvent(new Event('authChange'));
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="password" className={styles.label}>Password:</label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                className={styles.input}
-                                required
-                            />
-                        </div>
+        setTimeout(() => {
+          router.push('/');
+        }, 2000);
+      } else {
+        setMessage(response.data.detail || 'Invalid credentials. Please try again.');
+      }
+    } catch (err) {
+      setMessage('Network error. Please check your connection.');
+    }
+  };
 
-                        <button type="submit" className={styles.button}>Sign In</button>
+  return (
+    <div className={styles.pageContainer}>
+      <div className={styles.signInContainer}>
+        <div className={styles.formContainer}>
+          <h1 className={styles.heading}>Sign In</h1>
 
-                        {message && <p className={message.includes('Successfully') ? styles.success : styles.error}>{message}</p>}
-                    </form>
-
-                    <div className={styles.createAccountLink}>
-                        <p>Don't have an account?</p>
-                        <a href="/signup" className={styles.link}>Create Account</a>
-                    </div>
-                </div>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="username" className={styles.label}>
+                Username:
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
             </div>
+
+            <div className={styles.inputGroup}>
+              <label htmlFor="password" className={styles.label}>
+                Password:
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </div>
+
+            <button type="submit" className={styles.button}>
+              Sign In
+            </button>
+
+            {message && (
+              <p className={message.includes('Successfully') ? styles.success : styles.error}>
+                {message}
+              </p>
+            )}
+          </form>
+
+          <div className={styles.createAccountLink}>
+            <p>Don't have an account?</p>
+            <a href="/signup" className={styles.link}>
+              Create Account
+            </a>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default SignIn;
