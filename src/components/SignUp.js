@@ -466,10 +466,12 @@ const SignUp = () => {
                     className={styles.inputField}
                     required
                 />
-
+                <div class="formContainer">
+                {/* Other form elements like input fields and the sign up button */}
                 <div className={styles.createAccountLink}>
                     <p>Already have an account?</p>
                     <a href="/signin" className={styles.link}>Sign In</a>
+                </div>
                 </div>
 
                 <button type="submit" className={styles.signUpButton}>Sign Up</button>

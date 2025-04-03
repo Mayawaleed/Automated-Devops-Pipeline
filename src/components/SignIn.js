@@ -340,7 +340,6 @@ import { useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/signIn.module.css';
 import { useRouter } from 'next/router';
-import Image from 'next/image'; // Import Image component for Next.js
 
 const SignIn = () => {
     const [formData, setFormData] = useState({
@@ -390,16 +389,6 @@ const SignIn = () => {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.signInContainer}>
-                {/* Image inside the sign-in container */}
-                <div className={styles.imageContainer}>
-                    <Image
-                        src="/images/HOW_TO_ACHIEVE_CONTINUOUS_DEPLOYMENT_WITH_DEVOPS_-removebg-preview.png" // Correct path to the 'public' folder
-                        alt="DevOps Image"
-                        width={300}  // Adjust size of the image as needed
-                        height={300}
-                    />
-                </div>
-                
                 {/* Sign-in form */}
                 <div className={styles.formContainer}>
                     <h1 className={styles.heading}>Sign In</h1>
@@ -447,4 +436,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-

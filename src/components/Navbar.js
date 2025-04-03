@@ -37,7 +37,7 @@ const NavBar = () => {
                 <li><Link href="/downloadMonitoringTool">Scaling</Link></li> {/* Added this line */}
             </ul>
             <Link href="/signin">
-                <button className={styles.navbarButton}>Get Started</button>
+                <button className={styles.navbarButton}>Log In</button>
             </Link>
         </nav>
     );

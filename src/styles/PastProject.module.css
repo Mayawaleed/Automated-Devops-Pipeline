@@ -3,17 +3,15 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 25px; /* Increased padding for better spacing */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .title {
   text-align: center;
-  font-size: 28px;
+  font-size: 32px; /* Increased title font size */
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Increased margin for better spacing */
   color: #333;
 }
 
@@ -23,12 +21,12 @@
 }
 
 .projectItem {
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 20px; /* Increased padding for better spacing */
+  margin-bottom: 20px; /* Increased margin for better spacing */
   background-color: #fff;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Slightly increased border-radius */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Slightly increased box-shadow */
 }
 
 .projectItem:hover {
@@ -36,13 +34,13 @@
 }
 
 .projectName {
-  font-size: 20px;
+  font-size: 22px; /* Increased projectName font size */
   font-weight: bold;
   color: #007bff;
 }
 
 .projectType {
-  font-size: 16px;
+  font-size: 18px; /* Increased projectType font size */
   color: #555;
-  margin-top: 5px;
+  margin-top: 8px; /* Slightly increased margin-top */
 }
