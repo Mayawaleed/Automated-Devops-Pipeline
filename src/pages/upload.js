@@ -1189,21 +1189,3 @@ wait
 };
 
 export default Upload;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
