@@ -328,161 +328,6 @@
 
 // export default SignUp;
 
-// import { useState } from 'react';
-// import axios from 'axios';
-// import styles from '../styles/SignUp.module.css';
-// import { useRouter } from 'next/router';
-
-// const SignUp = () => {
-//     const [formData, setFormData] = useState({
-//         username: '',
-//         firstName: '',
-//         lastName: '',
-//         email: '',
-//         password: '',
-//         confirmPassword: ''
-//     });
-//     const [message, setMessage] = useState('');
-//     const router = useRouter();
-
-//     const handleChange = (e) => {
-//         setFormData({ ...formData, [e.target.name]: e.target.value });
-//     };
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-
-//         // Validate fields
-//         const { username, firstName, lastName, email, password, confirmPassword } = formData;
-
-//         if (!username || !firstName || !lastName || !email || !password || !confirmPassword) {
-//             setMessage('Please fill out all fields.');
-//             return;
-//         }
-
-//         if (password !== confirmPassword) {
-//             setMessage('Passwords do not match.');
-//             return;
-//         }
-
-//         try {
-//             // API request
-//             const response = await axios.post("http://127.0.0.1:8000/api/register/", {
-
-//                 username,
-//                 first_name: firstName,
-//                 last_name: lastName,
-//                 email,
-//                 password
-//             });
-
-//             setMessage('Sign Up Successful! Redirecting...');
-            
-//             // Save token if provided
-//             if (response.data.token) {
-//                 localStorage.setItem('authToken', response.data.token);
-//             }
-
-//             // Redirect to sign-in page
-//             setTimeout(() => {
-//                 router.push('/signin');
-//             }, 2000);
-//         } catch (err) {
-//             if (err.response) {
-//                 setMessage(err.response.data.detail || 'Failed to sign up. Please try again.');
-//             } else {
-//                 setMessage('Network error. Please check your connection.');
-//             }
-//         }
-//     };
-
-//     return (
-//         <div className={styles.signUpContainer}>
-//             <h1 className={styles.title}>Create Your Account</h1>
-//             <form onSubmit={handleSubmit} className={styles.formContainer}>
-
-//                 <label htmlFor="firstName" className={styles.label}>First Name:</label>
-//                 <input
-//                     type="text"
-//                     id="firstName"
-//                     name="firstName"
-//                     value={formData.firstName}
-//                     onChange={handleChange}
-//                     className={styles.inputField}
-//                     required
-//                 />
-
-//                 <label htmlFor="lastName" className={styles.label}>Last Name:</label>
-//                 <input
-//                     type="text"
-//                     id="lastName"
-//                     name="lastName"
-//                     value={formData.lastName}
-//                     onChange={handleChange}
-//                     className={styles.inputField}
-//                     required
-//                 />
-
-//                 <label htmlFor="username" className={styles.label}>Username:</label>
-//                 <input
-//                     type="text"
-//                     id="username"
-//                     name="username"
-//                     value={formData.username}
-//                     onChange={handleChange}
-//                     className={styles.inputField}
-//                     required
-//                 />
-
-//                 <label htmlFor="email" className={styles.label}>Email:</label>
-//                 <input
-//                     type="email"
-//                     id="email"
-//                     name="email"
-//                     value={formData.email}
-//                     onChange={handleChange}
-//                     className={styles.inputField}
-//                     required
-//                 />
-
-//                 <label htmlFor="password" className={styles.label}>Password:</label>
-//                 <input
-//                     type="password"
-//                     id="password"
-//                     name="password"
-//                     value={formData.password}
-//                     onChange={handleChange}
-//                     className={styles.inputField}
-//                     required
-//                 />
-
-//                 <label htmlFor="confirmPassword" className={styles.label}>Confirm Password:</label>
-//                 <input
-//                     type="password"
-//                     id="confirmPassword"
-//                     name="confirmPassword"
-//                     value={formData.confirmPassword}
-//                     onChange={handleChange}
-//                     className={styles.inputField}
-//                     required
-//                 />
-//                 <div class="formContainer">
-//                 {/* Other form elements like input fields and the sign up button */}
-//                 <div className={styles.createAccountLink}>
-//                     <p>Already have an account?</p>
-//                     <a href="/signin" className={styles.link}>Sign In</a>
-//                 </div>
-//                 </div>
-
-//                 <button type="submit" className={styles.signUpButton}>Sign Up</button>
-//                 {message && <p className={message.includes('Successful') ? styles.success : styles.error}>{message}</p>}
-//             </form>
-//         </div>
-//     );
-// };
-
-// export default SignUp;
-
 import { useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/SignUp.module.css';
@@ -499,25 +344,9 @@ const SignUp = () => {
     });
     const [message, setMessage] = useState('');
     const router = useRouter();
-    const [emailValidating, setEmailValidating] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        setMessage(''); // Clear previous messages on input change
-    };
-
-    const validateEmailExistence = async (email) => {
-        try {
-            setEmailValidating(true);
-            // Assuming your Django endpoint is at /api/check-email/
-            const response = await axios.post("http://127.0.0.1:8000/api/check-email/", { email }); //Adjust the URL
-            setEmailValidating(false);
-            return response.data.isValid; // Django should return {isValid: true/false}
-        } catch (error) {
-            console.error('Email validation error:', error);
-            setEmailValidating(false);
-            return false; // Treat validation failure as invalid
-        }
     };
 
     const handleSubmit = async (e) => {
@@ -536,12 +365,6 @@ const SignUp = () => {
             return;
         }
 
-        const isEmailValid = await validateEmailExistence(email);
-        if (!isEmailValid) {
-            setMessage('Email does not exist or is invalid.');
-            return;
-        }
-
         try {
             // API request
             const response = await axios.post("http://127.0.0.1:8000/api/register/", {
@@ -554,7 +377,7 @@ const SignUp = () => {
             });
 
             setMessage('Sign Up Successful! Redirecting...');
-
+            
             // Save token if provided
             if (response.data.token) {
                 localStorage.setItem('authToken', response.data.token);
@@ -621,7 +444,6 @@ const SignUp = () => {
                     className={styles.inputField}
                     required
                 />
-                {emailValidating && <p>Validating email...</p>}
 
                 <label htmlFor="password" className={styles.label}>Password:</label>
                 <input

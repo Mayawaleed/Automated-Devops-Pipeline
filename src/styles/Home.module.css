@@ -2,67 +2,66 @@
 
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  min-height: 100vh; /* Use min-height for full viewport coverage */
   width: 100%;
-  padding: 3rem 2rem;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  position: relative;
+  padding: 3rem 2rem; /* Increased padding for better spacing */
+  box-sizing: border-box; /* Ensure padding is included in width */
+  flex-wrap: wrap; /* Allow content to wrap on smaller screens */
 }
 
 .textContainer {
-  flex: 1 1 50%;
+  flex: 1 1 50%; /* Allow text to grow and shrink, start at 50% width */
   padding: 2rem;
   text-align: left;
-  display: flex;
+  display: flex; /* Use flexbox for vertical centering */
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Center text vertically */
 }
 
 .title {
-  font-size: 2.5rem; /* Reduced title font size */
-  color: #222;
-  margin: 0.75rem 0;
-  line-height: 1.2;
+  font-size: 3.5rem; /* Increased title font size */
+  color: #222; /* Slightly darker color for better readability */
+  margin: 0.75rem 0; /* Adjusted margins */
+  line-height: 1.2; /* Improved line height for readability */
 }
 
 .subtitle {
-  font-size: 1.5rem; /* Reduced subtitle font size */
-  color: #666;
-  margin-bottom: 2rem;
-  line-height: 1.4;
+  font-size: 1.75rem; /* Increased subtitle font size */
+  color: #666; /* Slightly darker color for better readability */
+  margin-bottom: 2rem; /* Increased margin for better spacing */
+  line-height: 1.4; /* Improved line height for readability */
 }
 
 .buttonContainer {
   display: flex;
   justify-content: flex-start;
-  margin-top: 2.5rem;
+  margin-top: 2.5rem; /* Increased margin for better spacing */
 }
 
 .learnMoreButton {
   background-color: #0070f3;
   color: white;
-  padding: 1rem 2.5rem;
-  font-size: 1.1rem;
+  padding: 1rem 2.5rem; /* Increased padding for larger button */
+  font-size: 1.1rem; /* Increased button font size */
   border: none;
-  border-radius: 5px;
+  border-radius: 5px; /* Slightly increased border radius */
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly increased box shadow */
 }
 
 .learnMoreButton:hover {
   background-color: #005bb5;
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Add subtle hover effect */
 }
 
 .imageContainer {
-  flex: 1 1 40%;
+  flex: 1 1 40%; /* Allow image to grow and shrink, start at 40% width */
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: center; /* Center image vertically */
 }
 
 .imageContainer img {
@@ -70,15 +69,22 @@
   height: auto;
 }
 
-/* Added styles for welcome message */
-.welcomeContainer {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 10;
-}
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      align-items: center; /* Center items on smaller screens */
+      padding: 2rem 1rem; /* Adjust padding for smaller screens */
+  }
 
-.welcomeMessage {
-  font-size: 1.5em;
-  color: #333;
+  .textContainer {
+      width: 100%; /* Make text container full width on smaller screens */
+      padding: 1.5rem; /* Adjust padding for smaller screens */
+      text-align: center; /* Center text on smaller screens */
+  }
+
+  .imageContainer {
+      width: 100%;
+      margin-top: 2.5rem; /* Increased margin for better spacing */
+      justify-content: center; /* Center image on smaller screens */
+  }
 }

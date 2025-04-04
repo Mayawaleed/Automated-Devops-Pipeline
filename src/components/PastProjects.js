@@ -1,26 +1,77 @@
-import styles from '../styles/Dashboard.module.css';
+// import styles from '../styles/Dashboard.module.css';
 
-const PastProjects = () => {
-  // Mock data for past projects
-  const projects = [
-    { name: "Website Redesign", type: "UI/UX" },
-    { name: "E-commerce Platform", type: "Development" },
-    { name: "Marketing Campaign", type: "SEO" },
-  ];
+// const PastProjects = () => {
+//   // Mock data for past projects
+//   const projects = [
+//     { name: "Website Redesign", type: "UI/UX" },
+//     { name: "E-commerce Platform", type: "Development" },
+//     { name: "Marketing Campaign", type: "SEO" },
+//   ];
 
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Past Projects</h1>
-      <div className={styles.projectList}>
-        {projects.map((project, index) => (
-          <div key={index} className={styles.projectCard}>
-            <h3>{project.name}</h3>
-            <p>Type: {project.type}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+//   return (
+//     <div className={styles.container}>
+//       <h1 className={styles.title}>Past Projects</h1>
+//       <div className={styles.projectList}>
+//         {projects.map((project, index) => (
+//           <div key={index} className={styles.projectCard}>
+//             <h3>{project.name}</h3>
+//             <p>Type: {project.type}</p>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PastProjects;
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import styles from '../styles/PastProject.module.css';
+
+const PastProject = () => {
+const [projects, setProjects] = useState([]); // State to store projects
+const [error, setError] = useState(''); // State to store error message
+
+useEffect(() => {
+const fetchProjects = async () => {
+try {
+const response = await axios.get('http://127.0.0.1:8000/api/projectdetails/', {
+headers: {
+'Authorization': `Bearer ${localStorage.getItem('token')}`, // Send token if needed
+},
+});
+
+console.log('Fetched projects:', response.data); // Log the response data
+
+setProjects(response.data);
+} catch (err) {
+console.error('Error fetching projects:', err.response ? err.response.data : err.message);
+setError('Failed to load past projects.');
+}
 };
 
-export default PastProjects;
+
+fetchProjects(); // Fetch projects when component mounts
+}, []); // Empty array ensures this only runs once, on component mount
+
+return (
+<div className={styles.container}>
+<h1 className={styles.title}>Past Projects</h1>
+{error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
+<ul className={styles.projectList}>
+{projects.length > 0 ? (
+projects.map((project) => (
+<li key={project.id} className={styles.projectItem}>
+<h2 className={styles.projectName}>{project.project_name}</h2> {/* Display project name */}
+<p className={styles.projectType}>Type: {project.project_type}</p> {/* Display project type */}
+</li>
+))
+) : (
+<p>No past projects available.</p> // Fixed comment syntax issue
+)}
+</ul>
+</div>
+);
+};
+
+export default PastProject;

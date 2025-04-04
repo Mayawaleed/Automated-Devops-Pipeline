@@ -1,94 +1,91 @@
-/* components/Navbar.module.css */
+/* General styling for the navbar */
 .navbar {
   background-color: #3c6d98;
-  padding: 12px 30px;
-  height: 60px;
+  padding: 12px 30px; /* Adjusted padding for better fit */
+  height: 60px; /* Adjusted height for better fit */
   display: flex;
-  justify-content: space-between; /* Important for left/right alignment */
+  justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid #444;
-  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+  border-bottom: 1px solid #444; /* Reduced border thickness */
+  font-family: 'Roboto', sans-serif; /* Added font family for consistency */
 }
 
-.leftNav {
-  display: flex;
-  gap: 30px;
+/* Styling for logo */
+.navbar .logo {
+  font-size: 26px; /* Slightly increased font size */
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Adjusted letter-spacing */
+  margin: 0; /* Reset default margin */
 }
 
-.rightNav {
-  display: flex;
-}
-
+/* Styling for the links */
 .navbarLinks {
   list-style: none;
   display: flex;
-  gap: 30px;
-  margin: 0;
-  padding: 0;
+  gap: 30px; /* Adjusted gap */
+  margin: 0; /* Reset default margin */
+  padding: 0; /* Reset default padding */
 }
 
+/* Styling for each link */
 .navbarLinks li {
   display: inline;
 }
 
+/* Styling for the anchor tag inside each link */
 .navbarLinks a {
   color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 18px; /* Adjusted font size */
   font-weight: 500;
   letter-spacing: 0.5px;
   transition: color 0.3s, transform 0.3s ease, padding-bottom 0.3s ease;
 }
 
+/* Hover effect for links */
 .navbarLinks a:hover {
   color: #0070f3;
-  transform: translateY(-2px);
-  padding-bottom: 3px;
+  transform: translateY(-2px); /* Adjusted hover effect */
+  padding-bottom: 3px; /* Adjusted padding */
 }
 
+/* Styling for the 'Get Started' button */
 .navbarButton {
   background-color: #0481ff;
-  color: #ffffff;
-  padding: 8px 18px;
+  color: #ffffff; /* Adjusted color for better contrast */
+  padding: 8px 18px; /* Adjusted padding */
   border: none;
-  border-radius: 5px;
+  border-radius: 5px; /* Adjusted border radius */
   cursor: pointer;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 600; /* Adjusted font weight */
   transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
 }
 
+/* Hover effect for the button */
 .navbarButton:hover {
   background-color: #005bb5;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: white; /* Adjusted color on hover */
+  transform: translateY(-2px); /* Adjusted hover effect */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
 }
 
 .navbarButton:active {
   background-color: #004088;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+  transform: translateY(0); /* Reset transform on active */
 }
 
+/* Apply smooth transition for logo, links, and button */
+.navbar .logo,
 .navbarLinks a,
-.navbarButton, .leftNav a {
+.navbarButton {
   transition: all 0.3s ease-in-out;
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-
-}
-
-.leftNav a:hover{
-    color: #0070f3;
-    transform: translateY(-2px);
-    padding-bottom: 3px;
 }
