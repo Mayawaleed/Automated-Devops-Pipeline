@@ -982,155 +982,141 @@
 
 // export default Upload;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import DOMPurify from 'dompurify';
 
-const Upload = () => {
-  const [selectedStage, setSelectedStage] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
-  const [scriptContent, setScriptContent] = useState('');
+const Upload = ({ projectDetails }) => {
+  // State declarations
+  const [selectedStage, setSelectedStage] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [scriptContent, setScriptContent] = useState("");
   const [scriptFetched, setScriptFetched] = useState(false);
+  const [csrfToken, setCsrfToken] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generationError, setGenerationError] = useState(null);
 
-  // Predefined scripts for each stage
-  const predefinedScripts = {
-    Planning: `#!/bin/bash
+  // Fetch CSRF token on component mount
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await fetch("/get-csrf-token/");
+        const data = await response.json();
+        setCsrfToken(data.csrfToken);
+      } catch (error) {
+        console.error("Error fetching CSRF token:", error);
+      }
+    };
+    fetchCsrfToken();
+  }, []);
 
-echo "Checking system dependencies..."
-
-# Check for Node.js
-if ! command -v node &> /dev/null
-then
-    echo "Node.js not found! Please install it."
-    exit 1
-fi
-
-# Check for Docker
-if ! command -v docker &> /dev/null
-then
-    echo "Docker is not installed! Please install Docker."
-    exit 1
-fi
-
-# Check for Heroku CLI
-if ! command -v heroku &> /dev/null
-then
-    echo "Heroku CLI not found! Please install it."
-    exit 1
-fi
-
-echo "All dependencies are installed!"
-exit 0
-`,
-    Development: `#!/bin/bash
-
-echo "Starting development server in Docker..."
-
-# Ensure dependencies are installed
-npm install
-
-# Run the development server
-docker run -it --rm -p 3000:3000 -v $(pwd):/app -w /app node:latest sh -c "npm install && npm start"
-
-echo "Development server running on http://localhost:3000"
-exit 0
-
-`,
-    Testing: `#!/bin/bash
-echo "No testing specified, skipping testing phase."
-exit 0
-`,
-    Deployment: `HEROKU_APP_NAME="your-heroku-app-name"
-
-echo "Logging into Heroku Container Registry..."
-heroku container:login
-
-echo "Tagging and pushing Docker image to Heroku..."
-docker tag devops-react-app registry.heroku.com/$HEROKU_APP_NAME/web
-docker push registry.heroku.com/$HEROKU_APP_NAME/web
-
-echo "Releasing the app on Heroku..."
-heroku container:release web -a $HEROKU_APP_NAME
-
-echo "Deployment to Heroku completed successfully!"
-exit 0
-`,
-    Monitoring: `#!/bin/bash
-
-HEROKU_APP_NAME="your-heroku-app-name"
-
-echo "Fetching Heroku application logs..."
-heroku logs --tail -a $HEROKU_APP_NAME &
-
-echo "Monitoring Docker container resource usage..."
-docker stats
-
-echo "Monitoring tools started. Press Ctrl+C to stop."
-wait
-`,
-  };
-
-  // Tool recommendations based on the selected stage
-  const toolsForStage = {
-    Planning: [
-      { name: 'Docker', image: 'https://link-to-docker-image.com', url: 'https://www.docker.com/' },
-      { name: 'Heroku', image: 'https://link-to-heroku-image.com', url: 'https://www.heroku.com/' },
-    ],
-    Development: [
-      { name: 'Docker', image: 'https://link-to-docker-image.com', url: 'https://www.docker.com/' },
-      { name: 'Visual Studio Code', image: 'https://link-to-vscode-image.com', url: 'https://code.visualstudio.com/' },
-    ],
-    Testing: [
-      { name: 'Postman', image: 'https://link-to-postman-image.com', url: 'https://www.postman.com/' },
-      { name: 'Jest', image: 'https://link-to-jest-image.com', url: 'https://jestjs.io/' },
-    ],
-    Deployment: [
-      { name: 'Heroku', image: 'https://link-to-heroku-image.com', url: 'https://www.heroku.com/' },
-      { name: 'AWS', image: 'https://link-to-aws-image.com', url: 'https://aws.amazon.com/' },
-    ],
-    Monitoring: [
-      { name: 'Prometheus', image: 'https://link-to-prometheus-image.com', url: 'https://prometheus.io/' },
-      { name: 'Grafana', image: 'https://link-to-grafana-image.com', url: 'https://grafana.com/' },
-    ],
-  };
-
-  // Handle stage selection and reset option
+  // Handle stage selection
   const handleStageSelection = (stage) => {
     setSelectedStage(stage);
-    setSelectedOption('');
+    setSelectedOption("");
     setScriptFetched(false);
-    setScriptContent('');
+    setScriptContent("");
+    setGenerationError(null);
   };
 
-  // Handle option selection (Script or Tool)
-  const handleOptionSelection = (option) => {
+  // Handle script generation
+  const handleOptionSelection = async (option) => {
     setSelectedOption(option);
-    if (option === 'Script') {
-      setScriptContent(predefinedScripts[selectedStage]); // Set the script for the selected stage
-      setScriptFetched(true);
+    setGenerationError(null);
+    
+    if (option === "Script") {
+      setIsGenerating(true);
+      try {
+        setScriptContent("Generating script...");
+        setScriptFetched(false);
+
+        const userInputs = {
+          project_id: projectDetails?.id,
+          deployment_type: projectDetails?.deployment_type,
+          testing_needs: projectDetails?.testing_needs,
+          framework: projectDetails?.framework,
+          language: projectDetails?.programming_language,
+          application_type: projectDetails?.project_type,
+          hosting_platform: projectDetails?.hosting_platform,
+          stage: selectedStage,
+        };
+
+        const response = await fetch("http://localhost:8000/api/generate-script/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+            "Accept": "text/html",
+          },
+          body: JSON.stringify(userInputs),
+        });
+
+        const responseContent = await response.text();
+        
+        if (!response.ok) {
+          setGenerationError(responseContent);
+        } else {
+          setScriptContent(responseContent);
+          setScriptFetched(true);
+        }
+      } catch (error) {
+        setGenerationError(`<div class="error">${error.message}</div>`);
+      } finally {
+        setIsGenerating(false);
+      }
     }
-    // You can later add tool generation logic here
   };
 
+  // Copy script to clipboard
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(scriptContent);
+    const plainText = scriptContent.replace(/<[^>]*>/g, '');
+    navigator.clipboard.writeText(plainText);
     alert("Script copied to clipboard!");
   };
 
+  // Download script as file
   const downloadScript = () => {
-    const blob = new Blob([scriptContent], { type: "text/plain" });
+    const plainText = scriptContent.replace(/<[^>]*>/g, '');
+    const blob = new Blob([plainText], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `${selectedStage.toLowerCase()}-script.sh`;
     link.click();
   };
 
+  // Tool recommendations
+  const toolsForStage = {
+    Planning: [
+      { name: "Docker", url: "https://www.docker.com/" },
+      { name: "Heroku", url: "https://www.heroku.com/" },
+    ],
+    Development: [
+      { name: "VS Code", url: "https://code.visualstudio.com/" },
+      { name: "Git", url: "https://git-scm.com/" },
+    ],
+    Testing: [
+      { name: "Postman", url: "https://www.postman.com/" },
+      { name: "Jest", url: "https://jestjs.io/" },
+    ],
+    Deployment: [
+      { name: "AWS", url: "https://aws.amazon.com/" },
+      { name: "Kubernetes", url: "https://kubernetes.io/" },
+    ],
+    Monitoring: [
+      { name: "Prometheus", url: "https://prometheus.io/" },
+      { name: "Grafana", url: "https://grafana.com/" },
+    ],
+  };
+
   return (
     <div className="upload-container">
-      <h1>Select Pipeline Stage</h1>
+      <h1>Pipeline Configuration</h1>
+      
+      {/* Stage selection buttons */}
       <div className="stage-buttons">
         {["Planning", "Development", "Testing", "Deployment", "Monitoring"].map((stage) => (
           <button
             key={stage}
-            className={`stage-button ${selectedStage === stage ? 'active' : ''}`}
+            className={`stage-btn ${selectedStage === stage ? "active" : ""}`}
             onClick={() => handleStageSelection(stage)}
           >
             {stage}
@@ -1138,50 +1124,67 @@ wait
         ))}
       </div>
 
+      {/* Selected stage display */}
       {selectedStage && (
-        <div>
-          <h4>Selected Stage: {selectedStage}</h4>
+        <div className="stage-display">
+          <h2>Selected Stage: {selectedStage}</h2>
           <div className="option-buttons">
             <button
-              className={`option-button ${selectedOption === 'Script' ? 'active' : ''}`}
-              onClick={() => handleOptionSelection('Script')}
+              className={`option-btn ${selectedOption === "Script" ? "active" : ""}`}
+              onClick={() => handleOptionSelection("Script")}
+              disabled={isGenerating}
             >
-              Script
+              {isGenerating ? "Generating..." : "Get Script"}
             </button>
             <button
-              className={`option-button ${selectedOption === 'Tool' ? 'active' : ''}`}
-              onClick={() => handleOptionSelection('Tool')}
+              className={`option-btn ${selectedOption === "Tool" ? "active" : ""}`}
+              onClick={() => handleOptionSelection("Tool")}
             >
-              Tool
+              Recommended Tools
             </button>
           </div>
         </div>
       )}
 
-      {selectedOption === 'Script' && scriptFetched && scriptContent && (
-        <div className="script-content">
-          <h3>Generated Script for {selectedStage}:</h3>
-          <pre className="script-display">{scriptContent}</pre>
-          <button onClick={copyToClipboard}>Copy</button>
-          <button onClick={downloadScript}>Download</button>
+      {/* Loading indicator */}
+      {isGenerating && <div className="loading">Generating script, please wait...</div>}
+
+      {/* Error display */}
+      {generationError && (
+        <div 
+          className="error-message"
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generationError) }} 
+        />
+      )}
+
+      {/* Script display */}
+      {selectedOption === "Script" && scriptFetched && scriptContent && (
+        <div className="script-output">
+          <h3>Generated {selectedStage} Script</h3>
+          <div 
+            className="script-content" 
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(scriptContent) }} 
+          />
+          <div className="script-actions">
+            <button onClick={copyToClipboard}>Copy to Clipboard</button>
+            <button onClick={downloadScript}>Download Script</button>
+          </div>
         </div>
       )}
 
-      {selectedOption === 'Tool' && (
-        <div className="tool-content">
-          <h3>Tools for {selectedStage}:</h3>
-          <div className="tool-recommendations">
-            {toolsForStage[selectedStage].map((tool) => (
-              <div key={tool.name} className="tool-card">
-                <img src={tool.image} alt={tool.name} className="tool-image" />
-                <h4>
-                  <a href={tool.url} target="_blank" rel="noopener noreferrer">
-                    {tool.name}
-                  </a>
-                </h4>
-              </div>
+      {/* Tools display */}
+      {selectedOption === "Tool" && (
+        <div className="tools-output">
+          <h3>Recommended Tools for {selectedStage}</h3>
+          <ul className="tools-list">
+            {toolsForStage[selectedStage]?.map((tool, index) => (
+              <li key={index}>
+                <a href={tool.url} target="_blank" rel="noopener noreferrer">
+                  {tool.name}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </div>
