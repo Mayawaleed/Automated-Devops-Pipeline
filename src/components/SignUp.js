@@ -367,7 +367,7 @@ const SignUp = () => {
 
         try {
             // API request
-            const response = await axios.post('http://localhost:8000/api/register/', {
+            const response = await axios.post('http://35.179.146.101:8000/api/register/', {
                 username,
                 first_name: firstName,
                 last_name: lastName,
