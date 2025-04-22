@@ -275,7 +275,7 @@ const SignIn = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', {
+            const response = await axios.post('http://35.179.146.101:8000/api/login/', {
                 username,
                 password
             });
