@@ -1040,7 +1040,7 @@ const Upload = ({ projectDetails }) => {
           stage: selectedStage,
         };
 
-        const response = await fetch("http://localhost:8000/api/generate-script/", {
+        const response = await fetch("http://35.179.146.101:8000/api/generate-script/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

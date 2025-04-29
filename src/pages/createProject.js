@@ -282,7 +282,7 @@ const CreateProject = () => {
 
         try {
             // Send the POST request to your Django backend API endpoint
-            const response = await axios.post('http://localhost:8000/api/projectdetails/', projectData);
+            const response = await axios.post('http://35.179.146.101:8000/api/projectdetails/', projectData);
             
             // If the response is successful, show success message
             setMessage('Project "${projectName}" created successfully!');

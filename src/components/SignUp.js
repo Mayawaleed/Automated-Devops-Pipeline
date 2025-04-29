@@ -372,7 +372,8 @@ const SignUp = () => {
                 first_name: firstName,
                 last_name: lastName,
                 email,
-                password
+                password,
+                password_confirm: confirmPassword
             });
 
             setMessage('Sign Up Successful! Redirecting...');
@@ -479,3 +480,192 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+// import { useState } from 'react';
+// import axios from 'axios';
+// import styles from '../styles/SignUp.module.css';
+// import { useRouter } from 'next/router';
+
+// const SignUp = () => {
+//     const [formData, setFormData] = useState({
+//         username: '',
+//         firstName: '',
+//         lastName: '',
+//         email: '',
+//         password: '',
+//         confirmPassword: ''
+//     });
+//     const [message, setMessage] = useState('');
+//     const [isLoading, setIsLoading] = useState(false);
+//     const router = useRouter();
+
+//     const validateEmail = (email) => {
+//         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//         return re.test(email);
+//     };
+
+//     const validatePassword = (password) => {
+//         const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+//         return re.test(password);
+//     };
+
+//     const handleChange = (e) => {
+//         setFormData({ ...formData, [e.target.name]: e.target.value });
+//     };
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+//         setIsLoading(true);
+//         setMessage('');
+
+//         const { username, firstName, lastName, email, password, confirmPassword } = formData;
+
+//         if (!username || !firstName || !lastName || !email || !password || !confirmPassword) {
+//             setMessage('Please fill out all fields.');
+//             setIsLoading(false);
+//             return;
+//         }
+
+//         if (!validateEmail(email)) {
+//             setMessage('Please enter a valid email address.');
+//             setIsLoading(false);
+//             return;
+//         }
+
+//         if (!validatePassword(password)) {
+//             setMessage('Password must contain at least 8 characters, including one uppercase, one lowercase, one number, and one special character.');
+//             setIsLoading(false);
+//             return;
+//         }
+
+//         if (password !== confirmPassword) {
+//             setMessage('Passwords do not match.');
+//             setIsLoading(false);
+//             return;
+//         }
+
+//         try {
+//             const response = await axios.post('http://35.179.146.101:8000/api/register/', {
+//                 username,
+//                 first_name: firstName,
+//                 last_name: lastName,
+//                 email,
+//                 password,
+//                 password_confirm: confirmPassword
+//             }, {
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 }
+//             });
+
+//             setMessage('Sign Up Successful! Redirecting...');
+            
+//             if (response.data.token) {
+//                 localStorage.setItem('authToken', response.data.token);
+//             }
+
+//             setTimeout(() => {
+//                 router.push('/signin');
+//             }, 2000);
+//         } catch (err) {
+//             if (err.response) {
+//                 setMessage(err.response.data.detail || err.response.data.message || 'Failed to sign up. Please try again.');
+//             } else {
+//                 setMessage('Network error. Please check your connection.');
+//             }
+//         } finally {
+//             setIsLoading(false);
+//         }
+//     };
+
+//     return (
+//         <div className={styles.signUpContainer}>
+//             <h1 className={styles.title}>Create Your Account</h1>
+//             <form onSubmit={handleSubmit} className={styles.formContainer}>
+//                 <label htmlFor="firstName" className={styles.label}>First Name:</label>
+//                 <input
+//                     type="text"
+//                     id="firstName"
+//                     name="firstName"
+//                     value={formData.firstName}
+//                     onChange={handleChange}
+//                     className={styles.inputField}
+//                     required
+//                 />
+
+//                 <label htmlFor="lastName" className={styles.label}>Last Name:</label>
+//                 <input
+//                     type="text"
+//                     id="lastName"
+//                     name="lastName"
+//                     value={formData.lastName}
+//                     onChange={handleChange}
+//                     className={styles.inputField}
+//                     required
+//                 />
+
+//                 <label htmlFor="username" className={styles.label}>Username:</label>
+//                 <input
+//                     type="text"
+//                     id="username"
+//                     name="username"
+//                     value={formData.username}
+//                     onChange={handleChange}
+//                     className={styles.inputField}
+//                     required
+//                 />
+
+//                 <label htmlFor="email" className={styles.label}>Email:</label>
+//                 <input
+//                     type="email"
+//                     id="email"
+//                     name="email"
+//                     value={formData.email}
+//                     onChange={handleChange}
+//                     className={styles.inputField}
+//                     required
+//                 />
+
+//                 <label htmlFor="password" className={styles.label}>Password:</label>
+//                 <input
+//                     type="password"
+//                     id="password"
+//                     name="password"
+//                     value={formData.password}
+//                     onChange={handleChange}
+//                     className={styles.inputField}
+//                     required
+//                     minLength="8"
+//                 />
+
+//                 <label htmlFor="confirmPassword" className={styles.label}>Confirm Password:</label>
+//                 <input
+//                     type="password"
+//                     id="confirmPassword"
+//                     name="confirmPassword"
+//                     value={formData.confirmPassword}
+//                     onChange={handleChange}
+//                     className={styles.inputField}
+//                     required
+//                     minLength="8"
+//                 />
+
+//                 <div className={styles.createAccountLink}>
+//                     <p>Already have an account?</p>
+//                     <a href="/signin" className={styles.link}>Sign In</a>
+//                 </div>
+
+//                 <button 
+//                     type="submit" 
+//                     className={styles.signUpButton}
+//                     disabled={isLoading}
+//                 >
+//                     {isLoading ? 'Processing...' : 'Sign Up'}
+//                 </button>
+//                 {message && <p className={message.includes('Successful') ? styles.success : styles.error}>{message}</p>}
+//             </form>
+//         </div>
+//     );
+// };
+
+// export default SignUp;
