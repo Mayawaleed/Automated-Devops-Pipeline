@@ -1,18 +1,22 @@
 .stageContainer {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    color: #333;
-  }
-  
-  .stageContainer h1 {
-    color: #ffa500; /* Change to your preferred color */
-    margin-bottom: 15px;
-  }
-  
-  .stageContainer p {
-    font-size: 18px;
-    line-height: 1.5;
-  }
-  
+  display: flex;
+  flex-direction: column; /* Stack heading and paragraph vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  height: 100vh;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #333;
+  text-align: center; /* Center text within elements */
+}
+
+.stageContainer h1 {
+  color: #3b69c4; /* Change to your preferred color */
+  margin-bottom: 15px;
+}
+
+.stageContainer p {
+  font-size: 18px;
+  line-height: 1.5;
+}

@@ -349,47 +349,81 @@ const SignUp = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const emailIsReal = async (email) => {
+        try {
+            const response = await axios.get('https://apilayer.net/api/check', {
+                params: {
+                    access_key: 'd473660f4966b7ae7fdd1c7869d5fab9',
+                    email,
+                    smtp: 1,
+                    format: 1
+                }
+            });
+    
+            // Optional: console.log(response.data);
+            return response.data.smtp_check && response.data.format_valid;
+        } catch (error) {
+            return false;
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate fields
         const { username, firstName, lastName, email, password, confirmPassword } = formData;
 
+        // Empty field check
         if (!username || !firstName || !lastName || !email || !password || !confirmPassword) {
             setMessage('Please fill out all fields.');
             return;
         }
 
+        // Passwords match check
         if (password !== confirmPassword) {
             setMessage('Passwords do not match.');
             return;
         }
 
+        // Password complexity check
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})/;
+        if (!passwordRegex.test(password)) {
+            setMessage('Password must be at least 8 characters, include one uppercase letter and one symbol.');
+            return;
+        }
+
+        // Real email check
+        const isEmailValid = await emailIsReal(email);
+        if (!isEmailValid) {
+            setMessage('Please enter a real, valid email address.');
+            return;
+        }
+
         try {
-            // API request
             const response = await axios.post('http://35.179.146.101:8000/api/register/', {
                 username,
                 first_name: firstName,
                 last_name: lastName,
                 email,
                 password,
-                password_confirm: confirmPassword
+                password2: confirmPassword // Important: Django default expects 'password2'
             });
 
             setMessage('Sign Up Successful! Redirecting...');
-            
-            // Save token if provided
+
             if (response.data.token) {
                 localStorage.setItem('authToken', response.data.token);
             }
 
-            // Redirect to sign-in page
             setTimeout(() => {
                 router.push('/signin');
             }, 2000);
         } catch (err) {
-            if (err.response) {
-                setMessage(err.response.data.detail || 'Failed to sign up. Please try again.');
+            if (err.response && err.response.data) {
+                const data = err.response.data;
+                const errorMessage = typeof data === 'string'
+                    ? data
+                    : Object.values(data).flat().join(' ');
+                setMessage(errorMessage || 'Failed to sign up. Please try again.');
             } else {
                 setMessage('Network error. Please check your connection.');
             }
@@ -480,6 +514,7 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
 
 // import { useState } from 'react';
 // import axios from 'axios';
