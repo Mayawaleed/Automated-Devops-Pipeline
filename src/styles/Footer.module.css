@@ -1,23 +1,30 @@
 .footer {
   background-color: #3c6d98;
-  color: #fff;
-  padding: 20px;
+  color: #ffffff;
+  padding: 24px 20px;
+  height: 108px;
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center;
+  align-items: center;
 }
 
 .footerContent {
   max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .StageLinks {
-  margin-top: 20px;
-}
-
-.StageLinks h3 {
-  color: #ffa500; /* Use red for the "Links" header */
-  font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: 10px; /* Reduced margin */
+  width: 100%;
+  display: flex; /* Use flexbox for link alignment */
+  flex-direction: column; /* Stack links vertically */
+  align-items: center; /* Center links horizontally */
 }
 
 .StageLinks ul {
@@ -26,17 +33,49 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0;
 }
 
 .StageLinks li {
-  margin: 5px 15px;
+  margin: 5px 10px;
 }
 
 .StageLinks a {
-  color: #fff9f9; /* Light grey for links */
+  color: #ffffff;
   text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
 }
 
 .StageLinks a:hover {
-  color: #fff; /* White on hover */
+  color: #fff;
+}
+
+.copyright {
+  font-size: 0.95rem; /* Match link font size */
+  margin-top: 10px; /* Add margin for spacing */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+      padding: 18px 20px;
+      height: auto;
+  }
+
+  .StageLinks h3 {
+      font-size: 1rem;
+  }
+
+  .StageLinks li {
+      margin: 3px 8px;
+  }
+
+  .StageLinks a {
+      font-size: 0.9rem;
+  }
+
+  .copyright {
+      margin-top: 5px;
+  }
 }

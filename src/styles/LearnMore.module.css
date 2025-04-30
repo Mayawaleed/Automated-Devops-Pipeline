@@ -1,36 +1,64 @@
 /* src/styles/LearnMore.module.css */
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+  height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Added a readable font */
+}
+
+.title {
+  font-size: 3rem; /* Increased title font size */
+  color: #222; /* Slightly darker color for better readability */
+  text-align: center;
+  margin-bottom: 2rem; /* Increased margin for better spacing */
+  font-weight: 600; /* Added font weight for emphasis */
+}
+
+.description {
+  font-size: 1.3rem; /* Increased description font size */
+  color: #333;
+  line-height: 1.7; /* Improved line height for readability */
+  margin-bottom: 2.5rem; /* Increased margin for better spacing */
+}
+
+.sectionTitle {
+  font-size: 2rem; /* Increased section title font size */
+  color: #0070f3;
+  margin-top: 2rem; /* Increased margin for better spacing */
+  margin-bottom: 1rem; /* Added margin-bottom for spacing */
+  font-weight: 600; /* Added font weight for emphasis */
+}
+
+.sectionDescription {
+  font-size: 1.1rem; /* Increased section description font size */
+  color: #444;
+  line-height: 1.7; /* Improved line height for readability */
+  margin-bottom: 2rem; /* Added margin-bottom for spacing */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+      padding: 2rem 1rem; /* Adjust padding for smaller screens */
   }
-  
+
   .title {
-    font-size: 2.5rem;
-    color: #1a1a1a;
-    text-align: center;
-    margin-bottom: 1.5rem;
+      font-size: 2.5rem; /* Adjust title font size for smaller screens */
+      margin-bottom: 1.5rem; /* Adjust margin for smaller screens */
   }
-  
+
   .description {
-    font-size: 1.2rem;
-    color: #333;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+      font-size: 1.2rem; /* Adjust description font size for smaller screens */
+      margin-bottom: 2rem; /* Adjust margin for smaller screens */
   }
-  
+
   .sectionTitle {
-    font-size: 1.8rem;
-    color: #0070f3;
-    margin-top: 1.5rem;
+      font-size: 1.8rem; /* Adjust section title font size for smaller screens */
+      margin-top: 1.5rem; /* Adjust margin for smaller screens */
   }
-  
+
   .sectionDescription {
-    font-size: 1rem;
-    color: #444;
-    line-height: 1.6;
+      font-size: 1rem; /* Adjust section description font size for smaller screens */
   }
-  
+}

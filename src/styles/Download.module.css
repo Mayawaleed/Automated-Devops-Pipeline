@@ -4,46 +4,70 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #1e3c72, #2a5298);
-    color: #fff;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Adjusted gradient angle */
+    color: #f8f8f8; /* Slightly lighter text for better readability */
     text-align: center;
-    padding: 2rem;
-    font-family: Arial, sans-serif;
+    padding: 3rem 2rem; /* Increased padding for better spacing */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+    box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 3rem; /* Increased title font size */
+    font-weight: 700; /* Slightly bolder font */
+    margin-bottom: 1.5rem; /* Increased margin for spacing */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Adjusted text shadow */
+    letter-spacing: -0.5px; /* Slightly reduced letter spacing */
 }
 
 .description {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    line-height: 1.5;
+    font-size: 1.3rem; /* Increased description font size */
+    margin-bottom: 2.5rem; /* Increased margin for spacing */
+    line-height: 1.6; /* Improved line height */
+    color: #e0e0e0; /* Slightly lighter color for better readability */
 }
 
 .buttonContainer {
-    margin-top: 2rem;
+    margin-top: 3rem; /* Increased margin for spacing */
 }
 
 .downloadButton {
     display: inline-block;
-    padding: 0.8rem 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+    padding: 1rem 2.5rem; /* Increased padding for a larger button */
+    font-size: 1.3rem; /* Increased button font size */
+    font-weight: 600; /* Adjusted font weight */
     color: #fff;
-    background-color: #ffa500;
+    background-color: #ff9800; /* Slightly adjusted orange color */
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* Slightly increased border radius */
     text-decoration: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25); /* Adjusted box shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Added box-shadow transition */
 }
 
 .downloadButton:hover {
-    background-color: #ff8c00;
-    transform: scale(1.1);
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+    background-color: #f57c00; /* Slightly darker orange on hover */
+    transform: translateY(-3px); /* Adjusted hover effect */
+    box-shadow: 0 7px 12px rgba(0, 0, 0, 0.35); /* Adjusted box shadow on hover */
+}
+
+.downloadButton:active {
+    transform: translateY(0); /* Reset transform on active */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adjusted box shadow on active */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem; /* Adjusted title font size for smaller screens */
+    }
+
+    .description {
+        font-size: 1.2rem; /* Adjusted description font size for smaller screens */
+    }
+
+    .downloadButton {
+        padding: 0.9rem 2.2rem; /* Adjusted button padding for smaller screens */
+        font-size: 1.2rem; /* Adjusted button font size for smaller screens */
+    }
 }
