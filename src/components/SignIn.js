@@ -246,11 +246,123 @@
 
 // export default SignIn;
 
+// import { useState } from 'react';
+// import axios from 'axios';
+// import styles from '../styles/signIn.module.css';
+// import { useRouter } from 'next/router';
+// import Image from 'next/image'; // Import Image component for Next.js
+
+// const SignIn = () => {
+//     const [formData, setFormData] = useState({
+//         username: '',
+//         password: ''
+//     });
+//     const [message, setMessage] = useState('');
+//     const router = useRouter();
+
+//     const handleChange = (e) => {
+//         setFormData({ ...formData, [e.target.name]: e.target.value });
+//     };
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+
+//         const { username, password } = formData;
+
+//         if (!username || !password) {
+//             setMessage('Please enter both username and password.');
+//             return;
+//         }
+
+//         try {
+//             const response = await axios.post('http://35.179.146.101:8000/api/login/', {
+//                 username,
+//                 password
+//             });
+
+//             if (response.status === 200) {
+//                 setMessage('Successfully signed in! Redirecting...');
+                
+//                 // Redirect to the home page
+//                 setTimeout(() => {
+//                     router.push('/');
+//                 }, 2000);
+//             }
+//         } catch (err) {
+//             if (err.response) {
+//                 setMessage(err.response.data.detail || 'Invalid credentials. Please try again.');
+//             } else {
+//                 setMessage('Network error. Please check your connection.');
+//             }
+//         }
+//     };
+
+//     return (
+//         <div className={styles.pageContainer}>
+//             <div className={styles.signInContainer}>
+//                 {/* Image inside the sign-in container */}
+//                 <div className={styles.imageContainer}>
+//                     <Image
+//                         src="/images/HOW_TO_ACHIEVE_CONTINUOUS_DEPLOYMENT_WITH_DEVOPS_-removebg-preview.png" // Correct path to the 'public' folder
+//                         alt="DevOps Image"
+//                         width={300}  // Adjust size of the image as needed
+//                         height={300}
+//                     />
+//                 </div>
+                
+//                 {/* Sign-in form */}
+//                 <div className={styles.formContainer}>
+//                     <h1 className={styles.heading}>Sign In</h1>
+
+//                     <form onSubmit={handleSubmit}>
+//                         <div className={styles.inputGroup}>
+//                             <label htmlFor="username" className={styles.label}>Username:</label>
+//                             <input
+//                                 type="text"
+//                                 id="username"
+//                                 name="username"
+//                                 value={formData.username}
+//                                 onChange={handleChange}
+//                                 className={styles.input}
+//                                 required
+//                             />
+//                         </div>
+
+//                         <div className={styles.inputGroup}>
+//                             <label htmlFor="password" className={styles.label}>Password:</label>
+//                             <input
+//                                 type="password"
+//                                 id="password"
+//                                 name="password"
+//                                 value={formData.password}
+//                                 onChange={handleChange}
+//                                 className={styles.input}
+//                                 required
+//                             />
+//                         </div>
+
+//                         <button type="submit" className={styles.button}>Sign In</button>
+
+//                         {message && <p className={message.includes('Successfully') ? styles.success : styles.error}>{message}</p>}
+//                     </form>
+
+//                     <div className={styles.createAccountLink}>
+//                         <p>Don't have an account?</p>
+//                         <a href="/signup" className={styles.link}>Create Account</a>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default SignIn;
+
+
 import { useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/signIn.module.css';
 import { useRouter } from 'next/router';
-import Image from 'next/image'; // Import Image component for Next.js
 
 const SignIn = () => {
     const [formData, setFormData] = useState({
@@ -282,11 +394,17 @@ const SignIn = () => {
 
             if (response.status === 200) {
                 setMessage('Successfully signed in! Redirecting...');
-                
+
+                // Save token to localStorage
+                localStorage.setItem('authToken', response.data.token);
+
+                // Notify NavBar that user is logged in
+                window.dispatchEvent(new Event("authChanged"));
+
                 // Redirect to the home page
                 setTimeout(() => {
                     router.push('/');
-                }, 2000);
+                }, 1500);
             }
         } catch (err) {
             if (err.response) {
@@ -300,17 +418,6 @@ const SignIn = () => {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.signInContainer}>
-                {/* Image inside the sign-in container */}
-                <div className={styles.imageContainer}>
-                    <Image
-                        src="/images/HOW_TO_ACHIEVE_CONTINUOUS_DEPLOYMENT_WITH_DEVOPS_-removebg-preview.png" // Correct path to the 'public' folder
-                        alt="DevOps Image"
-                        width={300}  // Adjust size of the image as needed
-                        height={300}
-                    />
-                </div>
-                
-                {/* Sign-in form */}
                 <div className={styles.formContainer}>
                     <h1 className={styles.heading}>Sign In</h1>
 
@@ -357,4 +464,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
